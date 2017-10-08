@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { Provider } from 'react-redux';
-import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import cookie from 'cookie';
 import IntlWrapper from './modules/Intl/IntlWrapper';
 

@@ -19,7 +19,7 @@ export function configureStore(initialState = {}) {
   }
 
   const store = createStore(rootReducer, initialState, compose(...enhancers));
-  const options = { refreshOnCheckAuth: false, redirectPath: '/home' };
+  // const options = { refreshOnCheckAuth: false, redirectPath: '/home' };
   sessionService.initSessionService(store);
 
   // For hot reloading reducers

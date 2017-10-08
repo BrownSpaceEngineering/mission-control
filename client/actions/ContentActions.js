@@ -131,7 +131,7 @@ export function impressMainCommentReduce(userid, index, id, loginUser) {
     userid,
     index,
     id,
-    loginUser
+    loginUser,
   };
 }
 

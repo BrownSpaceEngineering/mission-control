@@ -9,9 +9,6 @@ import styles from './App.css';
 import Helmet from 'react-helmet';
 import DevTools from './components/DevTools';
 
-// Import Actions
-import { switchLanguage } from '../../modules/Intl/IntlActions';
-
 export class App extends Component {
   constructor(props) {
     super(props);
