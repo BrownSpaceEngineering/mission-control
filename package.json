@@ -22,12 +22,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tba.git"
+    "url": "git+https://github.com/BrownSpaceEngineering/mission-control.git"
   },
   "bugs": {
-    "url": "https://github.com/tba/issues"
+    "url": "https://github.com/BrownSpaceEngineering/mission-control/issues"
   },
-  "homepage": "idk.yet.com",
+  "homepage": "brownspace.org",
   "author": "Andrew Kim <yun_ho_kim@brown.edu>",
   "license": "MIT",
   "dependencies": {
