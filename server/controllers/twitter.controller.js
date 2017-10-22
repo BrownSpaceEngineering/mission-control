@@ -1,24 +1,24 @@
-import dummyData from '../dummyData';
+import Twit from 'twitter';
 
-//the keys and tokens were given to me by twitter
-var twit = require('twitter'),
-	twitter = new twit({
-		consumer_key:  'cjll8FnPGIrKXmd6eihpmEa1x',
-		consumer_secret: 'fjt8HFJDAzlNFlSqXLMGSgQIKSqjRU1JcWtcQjjLeWUxd1LdYh',
-		access_token_key: '920859921033449472-vhSOP6U8JFhcvwFkG58dWSSJ8oXCtya',
-		access_token_secret: 'HpoExnWtZC8BmnZMPahDIrnrBXirSa78OrhCVYSUAEJYd'
-	});
-
+// The keys and tokens were given to me by twitter
+const twitter = new Twit({
+  consumer_key: 'cjll8FnPGIrKXmd6eihpmEa1x',
+  consumer_secret: 'fjt8HFJDAzlNFlSqXLMGSgQIKSqjRU1JcWtcQjjLeWUxd1LdYh',
+  access_token_key: '920859921033449472-vhSOP6U8JFhcvwFkG58dWSSJ8oXCtya',
+  access_token_secret: 'HpoExnWtZC8BmnZMPahDIrnrBXirSa78OrhCVYSUAEJYd',
+});
 
 export function getTweets(req, res) {
-  var params = {user_id: '920859921033449472'};
-  twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
-  	if (!error) {
-  		res.status(200).send(tweets);
-  	} else {
-  		throw error;
-  		res.status(500).send({ error: 'twitter error' });
-  	}
+  const params = {
+    user_id: '920859921033449472',
+    count: 5,
+  };
+  twitter.get('statuses/user_timeline', params, (error, tweets) => {
+    if (!error) {
+      console.log(tweets);
+      res.status(200).send(tweets);
+    } else {
+      res.status(500).send({ error: 'twitter error' });
+    }
   });
-
 }

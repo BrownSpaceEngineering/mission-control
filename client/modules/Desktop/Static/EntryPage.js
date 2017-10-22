@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TestComponent from './TestComponent';
-import TwitterBox from './TwitterBox'
+import TwitterBox from './TwitterBox';
 
 
 class EntryPage extends Component {
