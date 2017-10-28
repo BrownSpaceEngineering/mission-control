@@ -16,7 +16,7 @@ export function getTweets(req, res) {
   twitter.get('statuses/user_timeline', params, (error, tweets) => {
     if (!error) {
       console.log(tweets);
-      res.status(200).send(tweets);
+      res.status(200).send({ data: tweets });
     } else {
       res.status(500).send({ error: 'twitter error' });
     }
