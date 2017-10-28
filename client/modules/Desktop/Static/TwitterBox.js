@@ -23,10 +23,13 @@ class TwitterBox extends Component {
   render() {
     return (
       <div className={style.twitterBox}>
-        {this.state.tweets.length > 0 &&
+        {this.state.tweets &&
           this.state.tweets.map((each) => {
+            console.log(each.user.profile_image_url_https);
             return (
               <div key={each.id}>
+                <img src={each.user.profile_image_url_https} alt="profile" className="profile_image" />
+                <div className="username"><p>{each.user.name} @{each.user.screen_name}</p></div>
                 {each.text}
                 <br />
                 ---------------

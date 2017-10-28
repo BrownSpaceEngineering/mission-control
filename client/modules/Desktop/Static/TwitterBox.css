@@ -1,5 +1,14 @@
 .twitterBox {
-  background-color: blue;
-  color: white;
-  width: 50%;
+	background-color: blue;
+	color: white;
+	width: 50%;
+}
+
+.username {
+	color: skyblue;
+}
+
+.profile_image {
+	height: 50px;
+	width: 50px;
 }
