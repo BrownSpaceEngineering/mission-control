@@ -25,6 +25,12 @@ module.exports = {
     filename: '[name].[chunkhash].js',
     publicPath: '/',
     headers: { "Access-Control-Allow-Origin": "*" },
+    sourcePrefix : '',
+  },
+
+  node: {
+    // Resolve node module use of fs
+    fs: "empty",
   },
 
   resolve: {
@@ -36,14 +42,20 @@ module.exports = {
   },
 
   module: {
+    unknownContextCritical : false,
+
     loaders: [
       {
         test: /\.css$/,
-        exclude: /node_modules\/(?!(bootstrap|react-html5video)\/).*/,
+        exclude: /node_modules\/(?!(bootstrap)\/).*/,
         loader: 'style-loader!css-loader?localIdentName=[hash:base64]&modules&importLoaders=1!postcss-loader',
       }, {
+        test: /\widgets.css$/,
+        exclude: /node_modules\/(?!(cesium)\/).*/,
+        loader: 'style-loader!css-loader!postcss-loader',
+      }, {
         test: /\.css$/,
-        include: /node_modules/,
+        include: /node_modules\/(?!(cesium)\/).*/,
         loaders: ['style-loader', 'css-loader'],
       }, {
         test: /\.jsx*$/,
@@ -84,6 +96,9 @@ module.exports = {
         test: /\.scss$/,
         loaders: [ 'style', 'css', 'sass' ]
       },
+      {
+        test: /Cesium\.js$/, loader: 'script'
+      }
     ],
   },
 

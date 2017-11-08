@@ -9,9 +9,20 @@ module.exports = {
   output: {
     path: __dirname + '/dist/',
     filename: 'server.bundle.js',
+    sourcePrefix : '',
   },
 
   target: 'node',
+
+  amd: {
+    // Enable webpack-friendly use of require in Cesium
+    toUrlUndefined: true
+  },
+
+  node: {
+    // Resolve node module use of fs
+    fs: "empty",
+  },
 
   node: {
     __filename: true,
@@ -27,6 +38,8 @@ module.exports = {
   },
 
   module: {
+    unknownContextCritical : false,
+
     loaders: [
       {
         test: /\.js$/,
@@ -81,7 +94,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules\/(?!(bootstrap|react-html5video)\/).*/,
+        exclude: /node_modules\/(?!(bootstrap|cesium)\/).*/,
         loader: 'style-loader!css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader',
       },
       {

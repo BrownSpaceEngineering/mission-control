@@ -3,6 +3,7 @@ var cssnext = require('postcss-cssnext');
 var postcssFocus = require('postcss-focus');
 var postcssReporter = require('postcss-reporter');
 
+
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
 
@@ -25,6 +26,12 @@ module.exports = {
     filename: 'app.js',
     publicPath: 'http://0.0.0.0:3000/',
     headers: { "Access-Control-Allow-Origin": "*" },
+    sourcePrefix : '',
+  },
+
+  node: {
+    // Resolve node module use of fs
+    fs: "empty",
   },
 
   resolve: {
@@ -36,11 +43,17 @@ module.exports = {
   },
 
   module: {
+    unknownContextCritical : false,
+
     loaders: [
       {
         test: /\.css$/,
-        exclude: /node_modules\/(?!(bootstrap|react-html5video)\/).*/,
+        exclude: /node_modules\/(?!(bootstrap)\/).*/,
         loader: 'style-loader!css-loader?localIdentName=[name]__[local]__[hash:base64:5]&modules&importLoaders=1&sourceMap!postcss-loader',
+      }, {
+        test: /\widgets.css$/,
+        exclude: /node_modules\/(?!(cesium)\/).*/,
+        loader: 'style-loader!css-loader!postcss-loader',
       }, {
         test: /\.jsx*$/,
         exclude: [/node_modules/, /.+\.config.js/],
@@ -80,6 +93,9 @@ module.exports = {
         test: /\.scss$/,
         loaders: [ 'style', 'css', 'sass' ]
       },
+      {
+        test: /Cesium\.js$/, loader: 'script'
+      }
     ],
   },
 

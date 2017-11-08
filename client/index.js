@@ -9,6 +9,10 @@ import { configureStore } from './store';
 
 require('es6-object-assign/auto');
 
+window.CESIUM_BASE_URL = './';
+import 'cesium/Build/CesiumUnminified/Cesium';
+import 'cesium/Build/CesiumUnminified/Widgets/widgets.css';
+
 // Initialize store
 const store = configureStore(window.__INITIAL_STATE__);
 const mountApp = document.getElementById('root');

@@ -37,5 +37,13 @@ export default (
         });
       }}
     />
+    <Route
+      path="/cesium"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Desktop/Static/CesiumPage').default);
+        });
+      }}
+    />
   </Route>
 );

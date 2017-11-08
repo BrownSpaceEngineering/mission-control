@@ -84,6 +84,11 @@ app.use(Express.static(path.resolve(__dirname, '../dist/client')));
 
 app.use('/api', api);
 
+app.use('/Assets', Express.static(path.join(__dirname, '../public/Assets')));
+app.use('/ThirdParty', Express.static(path.join(__dirname, '../public/ThirdParty')));
+app.use('/Widgets', Express.static(path.join(__dirname, '../public/Widgets')));
+app.use('/Workers', Express.static(path.join(__dirname, '../public/Workers')));
+
 // Render Initial HTML
 const renderFullPage = (html, initialState) => {
   const head = Helmet.rewind();
