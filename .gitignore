@@ -10,7 +10,4 @@ coverage/
 
 .project
 package-lock.json
-public/
 temp/
-
-/public/cesium/

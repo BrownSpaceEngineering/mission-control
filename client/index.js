@@ -10,8 +10,8 @@ import { configureStore } from './store';
 require('es6-object-assign/auto');
 
 window.CESIUM_BASE_URL = './';
-import 'cesium/Build/CesiumUnminified/Cesium';
-import 'cesium/Build/CesiumUnminified/Widgets/widgets.css';
+import 'cesium/Build/Cesium/Cesium';
+import 'cesium/Build/Cesium/Widgets/widgets.css';
 
 // Initialize store
 const store = configureStore(window.__INITIAL_STATE__);
