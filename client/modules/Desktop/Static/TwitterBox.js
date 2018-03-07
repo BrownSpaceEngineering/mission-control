@@ -27,7 +27,7 @@ class TwitterBox extends Component {
         {this.state.tweets &&
           this.state.tweets.map((each) => {
             return (
-              <div key={each.id} className={style.tweet}>
+              <div key={each.id} className={style.tweet}>o
                 <img src={each.user.profile_image_url_https} alt="profile" className={style.profile_image} />
                 <div className={style.username}><p>{each.user.name}&nbsp; &nbsp;@{each.user.screen_name}</p></div>
                 <div className={style.text}>{each.text}</div>
