@@ -8,16 +8,16 @@
 }
 
 .cesium {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+	/*width: 100vw;*/
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
 }
 
 .rightBar {
 	grid-column: 2 / 3;
-	/*height: 100vh;*/
+	height: 100vh;
 	background-color: #c1c1c1;
 	opacity: 0.6;
 	box-shadow: 0px 0px 10px;
