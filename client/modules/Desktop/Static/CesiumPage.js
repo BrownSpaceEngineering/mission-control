@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import style from './CesiumPage.css';
 import RightBar from './RightBar.js';
+import Controls from './Controls.js';
 const Cesium = global.Cesium;
 
 class CesiumPage extends Component {
@@ -64,6 +65,7 @@ class CesiumPage extends Component {
           dangerouslySetInnerHTML={{ __html: '.cesium-viewer-toolbar { right: 25vw }' }}
         />
         <div className={style.cesium} id="cesiumContainer" ref={element => (this.cesiumContainer = element)} />
+        <Controls />
         <RightBar />
       </div>
     );
