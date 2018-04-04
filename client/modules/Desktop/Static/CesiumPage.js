@@ -42,7 +42,8 @@ class CesiumPage extends Component {
       name: 'AA',
       position,
       model: {
-        uri: '/cad/Heart.gltf',
+        uri: '/cad/model.gltf',
+        scale : 10,
       },
     });
 
@@ -55,6 +56,7 @@ class CesiumPage extends Component {
       pos = Cesium.Cartesian3.fromRadians(cart.longitude + 0.000001, cart.latitude, cart.height);
       pathPosition.addSample(Cesium.JulianDate.now(), pos);
       entity.position = pos;
+      viewer.trackedEntity = entity;
     });
   }
 
