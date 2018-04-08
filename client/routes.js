@@ -45,5 +45,13 @@ export default (
         });
       }}
     />
+    <Route
+      path="/cad"
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Desktop/Static/CadPage').default);
+        });
+      }}
+    />
   </Route>
 );

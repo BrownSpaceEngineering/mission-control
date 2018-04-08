@@ -36,14 +36,14 @@ class CesiumPage extends Component {
       },
     });
 
-    const position = Cesium.Cartesian3.fromDegrees(-123.0744619, 44.0503706, 5000.0);
+    const position = Cesium.Cartesian3.fromDegrees(-123.0744619, 44.0503706, 400000.0);
 
     const entity = viewer.entities.add({
       name: 'AA',
       position,
       model: {
         uri: '/cad/model.gltf',
-        scale : 10,
+        scale: 10,
       },
     });
 
@@ -53,7 +53,7 @@ class CesiumPage extends Component {
     clock.onTick.addEventListener(() => {
       let pos = entity.position._value;
       const cart = Cesium.Ellipsoid.WGS84.cartesianToCartographic(pos);
-      pos = Cesium.Cartesian3.fromRadians(cart.longitude + 0.000001, cart.latitude, cart.height);
+      pos = Cesium.Cartesian3.fromRadians(cart.longitude + 0.0001, cart.latitude, cart.height);
       pathPosition.addSample(Cesium.JulianDate.now(), pos);
       entity.position = pos;
       viewer.trackedEntity = entity;
