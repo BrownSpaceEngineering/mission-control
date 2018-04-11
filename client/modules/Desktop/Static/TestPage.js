@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import { VictoryBar } from 'victory';
+//import { VictoryBar } from 'victory';
+import { VictoryBar, VictoryChart, VictoryTheme, VictoryLine, VictoryScatter, VictoryStack, VictoryArea } from 'victory';
 
 import style from './TestPage.css';
 
@@ -32,13 +33,9 @@ class TestPage extends Component {
   render() {
     return (
       <div>
-        <VictoryBar
-          data={data}
-          // data accessor for x values
-          x="quarter"
-          // data accessor for y values
-          y="earnings"
-        />
+              <VictoryChart width={350} theme={VictoryTheme.material}>
+                <VictoryBar data={data} x="quarter" y="earnings" />
+              </VictoryChart>
       </div>
     );
   }
