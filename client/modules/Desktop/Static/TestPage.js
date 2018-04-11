@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-
 import { Button } from 'reactstrap';
+import { VictoryBar } from 'victory';
 
 import style from './TestPage.css';
 
+
+const data = [
+  {quarter: 1, earnings: 13000},
+  {quarter: 2, earnings: 16500},
+  {quarter: 3, earnings: 14250},
+  {quarter: 4, earnings: 19000}
+];
 
 class TestPage extends Component {
 
@@ -25,10 +32,13 @@ class TestPage extends Component {
   render() {
     return (
       <div>
-        <h1>The counter is {this.state.counter}.</h1>
-        <Button color="primary" className={style.counterButton} onClick={this.handleClick}>
-          Increment
-        </Button>
+        <VictoryBar
+          data={data}
+          // data accessor for x values
+          x="quarter"
+          // data accessor for y values
+          y="earnings"
+        />
       </div>
     );
   }

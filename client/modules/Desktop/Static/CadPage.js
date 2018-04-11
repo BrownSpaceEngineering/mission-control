@@ -25,9 +25,11 @@ class TestPage extends Component {
   render() {
     return (
       <div>
-        <iframe src="https://myhub.autodesk360.com/ue2aaba84/shares/public/SH7f1edQT22b515c761e08a6bec09be6c898?mode=embed" 
-        width="800" height="600" allowfullscreen="true" webkitallowfullscreen="true" 
-        mozallowfullscreen="true"  frameborder="0"></iframe>  
+        <iframe
+          src="https://myhub.autodesk360.com/ue2aaba84/shares/public/SH7f1edQT22b515c761e08a6bec09be6c898?mode=embed"
+          width="800" height="600" allowfullscreen="true" webkitallowfullscreen="true"
+          mozallowfullscreen="true"  frameborder="0">
+        </iframe>
       </div>
     );
   }
