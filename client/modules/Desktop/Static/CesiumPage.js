@@ -6,6 +6,12 @@ import Controls from './Controls.js';
 const Cesium = global.Cesium;
 
 class CesiumPage extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   componentDidMount() {
     Cesium.BingMapsApi.defaultKey = 'AoB0m6xdYV5QFN7G597_nodN55DfzuUyr-7-' +
                                     'jjBSUSB1dea5LZPLNIBeIJYfB-59';
@@ -79,7 +85,9 @@ class CesiumPage extends Component {
           dangerouslySetInnerHTML={{ __html: '.cesium-viewer-toolbar { right: 25vw }' }}
         />
         <div className={style.cesium} id="cesiumContainer" ref={element => (this.cesiumContainer = element)} />
-        <Controls />
+        {this.state.viewer &&
+          <Controls scene={this.state.viewer.scene} />
+        }
         <RightBar />
       </div>
     );
