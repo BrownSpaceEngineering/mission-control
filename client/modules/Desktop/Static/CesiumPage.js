@@ -36,27 +36,39 @@ class CesiumPage extends Component {
       },
     });
 
-    const position = Cesium.Cartesian3.fromDegrees(-123.0744619, 44.0503706, 400000.0);
+    let velocityV;
+    let velocityM;
 
-    const entity = viewer.entities.add({
-      name: 'AA',
-      position,
-      model: {
-        uri: '/cad/Heart.gltf',
-        scale: 10,
-      },
-    });
+    fetch('http://35.192.71.2:3000/api/get_lonlatalt/ISS%20(ZARYA)').then((result) => {
+      return result.json();
+    }).then((result) => {
+      const position = Cesium.Cartesian3.fromDegrees(result.longitude,
+                                                     result.latitude,
+                                                     result.altitude);
 
-    viewer.trackedEntity = entity;
+      const entity = viewer.entities.add({
+        name: 'AA',
+        position,
+        model: {
+          uri: '/cad/Heart.gltf',
+          scale: 10,
+        },
+      });
 
-    const clock = viewer.clock;
-    clock.onTick.addEventListener(() => {
-      let pos = entity.position._value;
-      const cart = Cesium.Ellipsoid.WGS84.cartesianToCartographic(pos);
-      pos = Cesium.Cartesian3.fromRadians(cart.longitude + 0.0001, cart.latitude, cart.height);
-      pathPosition.addSample(Cesium.JulianDate.now(), pos);
-      entity.position = pos;
       viewer.trackedEntity = entity;
+
+      setInterval(() => {
+        fetch('http://35.192.71.2:3000/api/get_lonlatalt/ISS%20(ZARYA)').then((result2) => {
+          return result2.json();
+        }).then((result2) => {
+          const position2 = Cesium.Cartesian3.fromDegrees(result2.longitude,
+                                                         result2.latitude,
+                                                         result2.altitude);
+          pathPosition.addSample(Cesium.JulianDate.now(), position2);
+          entity.position = position2;
+          viewer.trackedEntity = entity;
+        });
+      }, 1000);
     });
   }
 
