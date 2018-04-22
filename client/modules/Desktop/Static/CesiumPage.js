@@ -25,8 +25,8 @@ class CesiumPage extends Component {
       name: 'path',
       path: {
         show: true,
-        leadTime: 0,
-        trailTime: 600000,
+        leadTime: 60000,
+        trailTime: 60000,
         width: 10,
         resolution: 1,
         material: new Cesium.PolylineGlowMaterialProperty({
@@ -50,8 +50,8 @@ class CesiumPage extends Component {
         name: 'AA',
         position,
         model: {
-          uri: '/cad/Heart.gltf',
-          scale: 10,
+          uri: '/cad/model.gltf',
+          scale: 1,
         },
       });
 
