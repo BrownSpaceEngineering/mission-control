@@ -1,0 +1,47 @@
+.navigation {
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 8vh;
+  width: 100vw;
+  padding: 0vh 3vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 8px 1px #111111;
+  display: grid;
+  grid-template-columns: 20% auto 20%;
+  align-items: center;
+  font-size: 24px;
+}
+
+.logo {
+  grid-column: 1/2;
+  justify-self: start;
+}
+
+.links {
+  grid-column: 2/3;
+  justify-self: center;
+  display: grid;
+  width: 30vw;
+  grid-template-columns: auto auto auto;
+}
+
+.links a {
+  color: #aaaaaa;
+  text-align: center;
+  text-decoration: none;
+}
+
+.links a.active {
+  color: #5284ce;
+}
+
+.links a:hover {
+  color: #ffffff;
+}
+
+.social {
+  grid-column: 3/4;
+  justify-self: end;
+}

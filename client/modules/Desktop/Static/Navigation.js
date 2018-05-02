@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-import style from './CesiumPage.css';
+import style from './Navigation.css';
 
 import logo from '../../../../public/images/bse_white.png';
 

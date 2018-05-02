@@ -27,12 +27,6 @@ class Controls extends Component {
         <Button onClick={() => {this.props.scene.mode = Cesium.SceneMode.SCENE3D; }} className={style.button} active>
           <img src={button3D} alt="3D"     className={style.buttonImage} />
         </Button>
-          <Button onClick={() => {window.location = '/cad';}}  className={style.button}>
-            <img src={buttonCAD} alt="CAD" className={style.buttonImage} />
-          </Button>
-        <Button onClick={() => {window.location = '/test';}} className={style.button}>
-          <img src={buttonData} alt="Data" className={style.buttonImage} />
-        </Button>
       </div>
     );
   }

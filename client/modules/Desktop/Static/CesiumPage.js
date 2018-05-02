@@ -27,6 +27,10 @@ class CesiumPage extends Component {
       fullscreenButton: false,
     });
 
+    this.setState({
+      viewer,
+    })
+
     // viewer.scene.mode = Cesium.SceneMode.SCENE2D;
 
     const pathPosition = new Cesium.SampledPositionProperty();
