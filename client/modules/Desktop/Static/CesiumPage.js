@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 
 import style from './CesiumPage.css';
-import RightBar from './RightBar.js';
+import Navigation from './Navigation.js';
+import Preamble from './Preamble.js';
+import CurrentData from './CurrentData.js';
+import TrackingData from './TrackingData.js';
+import EQUiSat from './EQUiSat.js';
 import Controls from './Controls.js';
 const Cesium = global.Cesium;
 
@@ -88,7 +92,11 @@ class CesiumPage extends Component {
         {this.state.viewer &&
           <Controls scene={this.state.viewer.scene} />
         }
-        <RightBar />
+        <Navigation />
+        <Preamble />
+        <CurrentData />
+        <TrackingData />
+        <EQUiSat />
       </div>
     );
   }
