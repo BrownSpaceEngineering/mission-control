@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 import style from './CesiumPage.css';
 
@@ -8,10 +9,10 @@ class Navigation extends Component {
   render() {
     return (
       <div className={style.navigation}>
-        <a href="localhost:3000/cesium" className={style.active}>Mission Control</a>
+        <Link to="/" className={style.active}>Mission Control</Link>
         <img className={style.logo} src={logo} height="40px" width="40px" alt="logo" />
-        <a href="localhost:3000/cad">CAD</a>
-        <a href="localhost:3000/data">Data</a>
+        <Link to="/cad">CAD</Link>
+        <Link to="/data">Data</Link>
       </div>
     );
   }

@@ -1,4 +1,5 @@
 .cadFrame {
     width: 100vw;
-    height: 99.5vh;
+    height: 100vh;
+    display: block;
 }
