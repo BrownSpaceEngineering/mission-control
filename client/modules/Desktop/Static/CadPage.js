@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Button } from 'reactstrap';
 
-import style from './TestPage.css';
+import style from './CadPage.css';
 
 
 class TestPage extends Component {
@@ -25,10 +25,9 @@ class TestPage extends Component {
   render() {
     return (
       <div>
-        <iframe
+        <iframe className={style.cadFrame}
           src="https://myhub.autodesk360.com/ue2aaba84/shares/public/SH7f1edQT22b515c761e08a6bec09be6c898?mode=embed"
-          width="800" height="600" allowfullscreen="true" webkitallowfullscreen="true"
-          mozallowfullscreen="true"  frameborder="0">
+          width="800" height="600" allowFullScreen="true"  frameBorder="0">
         </iframe>
       </div>
     );

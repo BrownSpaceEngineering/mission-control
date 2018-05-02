@@ -25,7 +25,7 @@ export default (
     <IndexRoute
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
-          cb(null, require('./modules/Desktop/Static/EntryPage').default);
+          cb(null, require('./modules/Desktop/Static/CesiumPage').default);
         });
       }}
     />
