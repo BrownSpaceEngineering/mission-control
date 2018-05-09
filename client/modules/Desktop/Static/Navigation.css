@@ -19,6 +19,10 @@
   justify-self: start;
 }
 
+.logo:hover {
+  opacity: 0.7;
+}
+
 .links {
   grid-column: 2/3;
   justify-self: center;
@@ -28,7 +32,7 @@
 }
 
 .links a {
-  color: #aaaaaa;
+  color: #ffffff;
   text-align: center;
   text-decoration: none;
 }
@@ -38,10 +42,18 @@
 }
 
 .links a:hover {
-  color: #ffffff;
+  color: #aaaaaa;
 }
 
 .social {
   grid-column: 3/4;
   justify-self: end;
+}
+
+.social img {
+  margin: 0 10px;
+}
+
+.social img:hover {
+  opacity: 0.7;
 }

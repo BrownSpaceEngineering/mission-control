@@ -13,10 +13,19 @@ class CesiumPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loaded: false,
+    };
   }
 
   componentDidMount() {
+    setTimeout(() => {
+      console.log("Loaded");
+      this.setState({
+        loaded: true,
+      });
+    }, 3000);
+
     Cesium.BingMapsApi.defaultKey = 'AoB0m6xdYV5QFN7G597_nodN55DfzuUyr-7-' +
                                     'jjBSUSB1dea5LZPLNIBeIJYfB-59';
 
@@ -25,11 +34,15 @@ class CesiumPage extends Component {
       shouldAnimate: true,
       timeline: false,
       fullscreenButton: false,
+      homeButton: false,
+      infoBox: false,
+      sceneModePicker: false
+
     });
 
     this.setState({
       viewer,
-    })
+    });
 
     // viewer.scene.mode = Cesium.SceneMode.SCENE2D;
 
@@ -50,9 +63,6 @@ class CesiumPage extends Component {
       },
     });
 
-    let velocityV;
-    let velocityM;
-
     fetch('http://35.192.71.2:3000/api/get_lonlatalt/ISS%20(ZARYA)').then((result) => {
       return result.json();
     }).then((result) => {
@@ -64,7 +74,7 @@ class CesiumPage extends Component {
         name: 'AA',
         position,
         model: {
-          uri: '/cad/model.gltf',
+          uri: '/cad/Heart.gltf',
           scale: 1,
         },
       });
@@ -89,14 +99,15 @@ class CesiumPage extends Component {
   render() {
     return (
       <div className={style.pageContainer}>
+        { this.state.loaded ? <div></div> : <div className={style.overlay}></div> }
         <style
-          dangerouslySetInnerHTML={{ __html: '.cesium-viewer-toolbar { right: 25vw }' }}
+          dangerouslySetInnerHTML={{ __html: '.cesium-viewer-toolbar { visibility: hidden }' }}
         />
         <div className={style.cesium} id="cesiumContainer" ref={element => (this.cesiumContainer = element)} />
         {this.state.viewer &&
           <Controls scene={this.state.viewer.scene} />
         }
-        <Navigation />
+        <Navigation active='missioncontrol' />
         <Preamble />
         <CurrentData />
         <TrackingData />

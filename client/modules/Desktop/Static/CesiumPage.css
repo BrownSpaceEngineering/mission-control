@@ -119,3 +119,12 @@ body {
 	color: #90EE90;/*#FF9E3C;*/
 	text-shadow: 0 0 5px #98FB98; /*#FFAB55;*/
 }
+
+.overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../../../public/images/bse_wallpaper.jpg');
+    background-size: cover;
+    z-index: 9999;
+}
