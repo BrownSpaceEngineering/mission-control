@@ -37,7 +37,6 @@ import registerListeners from './listeners';
 // Import required modules
 import fetchRoutes from './util/fetchRoutes';
 import { fetchComponentData } from './util/fetchData';
-import api from './routes/api.routes';
 import serverConfig from './config';
 
 // ------- Create Session & Cookies -------
@@ -81,8 +80,6 @@ app.use(compression());
 // app.use(bodyParser.json({ limit: '20mb' }));
 // app.use(bodyParser.urlencoded({ limit: '20mb', extended: false }));
 app.use(Express.static(path.resolve(__dirname, '../dist/client')));
-
-app.use('/api', api);
 
 app.use('/cad', Express.static(path.join(__dirname, '../public/cad')));
 app.use('/Assets', Express.static(path.join(__dirname, '../public/Assets')));
