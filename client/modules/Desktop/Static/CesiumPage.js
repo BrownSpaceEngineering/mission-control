@@ -74,7 +74,7 @@ class CesiumPage extends Component {
         name: 'AA',
         position,
         model: {
-          uri: '/cad/small_sat.gltf',
+          uri: '/cad/sat.gltf',
           scale: 1,
         },
       });
