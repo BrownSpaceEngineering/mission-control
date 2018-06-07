@@ -1,0 +1,35 @@
+.cesium-viewer-toolbar {
+    visibility: hidden;
+}
+
+#cesiumContainer {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+  overflow: hidden;
+}
+
+.pageContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    padding-top: 8vh;
+    display: grid;
+    grid-template-columns: 22% auto 22%;
+    grid-template-rows: 45% 45% 0%;
+    justify-items: stretch;
+    font-size: 16px;
+}
+
+.overlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../assets/images/bse_wallpaper.jpg');
+    background-size: cover;
+    z-index: 9999;
+}

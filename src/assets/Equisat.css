@@ -1,0 +1,15 @@
+.equisat {
+    z-index: 3;
+    padding: 0 20px 0 20px;
+    margin: 20px;
+    background-color: black;
+    color: white;
+    text-shadow: 0 0 5px #EEEEEE;
+    border: 3px solid #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #EEEEEE;
+    grid-column: 3/4;
+    grid-row: 2/2;
+    opacity: 0.8;
+    text-align: center;
+}

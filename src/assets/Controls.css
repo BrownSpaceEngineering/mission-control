@@ -1,0 +1,19 @@
+.controls {
+    position: absolute;
+    z-index: 3;
+    bottom: 10vh;
+    right: 21vw;
+}
+
+.buttonImage {
+    width: 40px;
+    height: 40px;
+}
+
+.button {
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: white;
+}
