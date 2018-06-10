@@ -25,6 +25,10 @@ body {
     font-size: 16px;
 }
 
+.notLoaded {
+    opacity: 0;
+}
+
 .overlay {
     position: fixed;
     height: 100vh;

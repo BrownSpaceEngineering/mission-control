@@ -15,6 +15,9 @@ import PolylineGlowMaterialProperty from "cesium/Source/DataSources/PolylineGlow
 import Color from "cesium/Source/Core/Color";
 import Cartesian3 from "cesium/Source/Core/Cartesian3";
 import JulianDate from "cesium/Source/Core/JulianDate";
+import SceneMode from "cesium/Source/Scene/SceneMode";
+import createOpenStreetMapImageryProvider from "cesium/Source/Scene/createOpenStreetMapImageryProvider"
+import IonImageryProvider from "cesium/Source/Scene/IonImageryProvider";
 
 class CesiumPage extends Component {
   constructor(props) {
@@ -45,12 +48,13 @@ class CesiumPage extends Component {
       fullscreenButton: false,
       homeButton: false,
       infoBox: false,
-      sceneModePicker: false
+      sceneModePicker: false,
+      imageryProvider : new createOpenStreetMapImageryProvider({
+          url : 'http://1.basemaps.cartocdn.com/light_all/'
+      }),
     });
 
-    this.setState({
-      viewer,
-    });
+    viewer.scene.mode = SceneMode.SCENE2D;
 
     const pathPosition = new SampledPositionProperty();
     viewer.entities.add({
@@ -77,7 +81,6 @@ class CesiumPage extends Component {
                                               result.altitude);
 
       const entity = viewer.entities.add({
-        name: 'AA',
         position,
         model: {
           uri: '/cad/sat.gltf',
@@ -86,7 +89,16 @@ class CesiumPage extends Component {
         },
       });
 
+      viewer.scene.screenSpaceCameraController.minimumZoomDistance = 15000000;
       viewer.trackedEntity = entity;
+
+      this.setState({
+        viewer,
+        entity
+      });
+      setTimeout(() => {
+        viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1;
+      }, 1000);
 
       setInterval(() => {
         fetch('http://35.192.71.2:3000/api/get_lonlatalt/ISS%20(ZARYA)').then((result2) => {
@@ -105,17 +117,19 @@ class CesiumPage extends Component {
 
   render() {
     return (
-      <div className="pageContainer">
+      <div>
         { this.state.loaded ? '' : <div className="overlay"></div> }
-        {this.state.viewer &&
-          <Controls scene={this.state.viewer.scene} />
-        }
-        <Navigation active='missioncontrol' />
-        <Preamble />
-        <CurrentData />
-        <TrackingData />
-        <Equisat />
-        <div id="cesiumContainer"></div>
+        <div className={`pageContainer ${this.state.loaded ? '' : 'notLoaded'}`} >
+          {this.state.viewer && this.state.entity &&
+            <Controls viewer={this.state.viewer} entity={this.state.entity} />
+          }
+          <Navigation active='missioncontrol' />
+          <Preamble />
+          <CurrentData />
+          <TrackingData />
+          <Equisat />
+          <div id="cesiumContainer"></div>
+        </div>
       </div>
     );
   }

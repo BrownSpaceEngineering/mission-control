@@ -10,10 +10,30 @@ class Controls extends Component {
   render() {
     return (
       <div className='controls'>
-        <button onClick={() => {this.props.scene.mode = SceneMode.SCENE2D; }}   className='button'>
+        <button
+        onClick={() => {
+          this.props.viewer.scene.mode = SceneMode.SCENE2D;
+          this.props.viewer.scene.screenSpaceCameraController.minimumZoomDistance = 15000000;
+          this.props.viewer.trackedEntity = this.props.entity;
+          setTimeout(() => {
+            this.props.viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1;
+          }, 1000);
+        }}
+        className='button'
+        >
           <img src={button2D} alt="2D" className='buttonImage' />
         </button>
-        <button onClick={() => {this.props.scene.mode = SceneMode.SCENE3D; }} className='button'>
+        <button
+          onClick={() => {
+            this.props.viewer.scene.mode = SceneMode.SCENE3D;
+            this.props.viewer.scene.screenSpaceCameraController.minimumZoomDistance = 15000000;
+            this.props.viewer.trackedEntity = this.props.entity;
+            setTimeout(() => {
+              this.props.viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1;
+            }, 1000);
+          }}
+          className='button'
+        >
           <img src={button3D} alt="3D" className='buttonImage' />
         </button>
       </div>
