@@ -67,8 +67,7 @@ class CesiumPage extends Component {
         width: 10,
         resolution: 1,
         material: new PolylineGlowMaterialProperty({
-          glowPower: 0.3,
-          color: Color.PALEGOLDENROD,
+          color: Color.CORNFLOWERBLUE,
         }),
       },
     });
