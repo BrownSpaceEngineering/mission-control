@@ -12,6 +12,22 @@ class Controls extends Component {
       <div className='controls'>
         <button
         onClick={() => {
+          this.props.mapLayer.alpha = 1;
+        }}
+        className='button'
+        >
+          Map
+        </button>
+        <button
+          onClick={() => {
+            this.props.mapLayer.alpha = 0;
+          }}
+          className='button'
+        >
+          Satellite
+        </button>
+        <button
+        onClick={() => {
           this.props.viewer.scene.mode = SceneMode.SCENE2D;
           this.props.viewer.scene.screenSpaceCameraController.minimumZoomDistance = 15000000;
           this.props.viewer.trackedEntity = this.props.entity;
@@ -21,7 +37,7 @@ class Controls extends Component {
         }}
         className='button'
         >
-          <img src={button2D} alt="2D" className='buttonImage' />
+          2D
         </button>
         <button
           onClick={() => {
@@ -34,7 +50,7 @@ class Controls extends Component {
           }}
           className='button'
         >
-          <img src={button3D} alt="3D" className='buttonImage' />
+          3D
         </button>
       </div>
     );

@@ -49,11 +49,11 @@ class CesiumPage extends Component {
       homeButton: false,
       infoBox: false,
       sceneModePicker: false,
-      imageryProvider : new createOpenStreetMapImageryProvider({
-          url : 'https://a.tile.openstreetmap.org/'
-      }),
     });
 
+    const mapLayer = viewer.scene.imageryLayers.addImageryProvider(new createOpenStreetMapImageryProvider({
+        url : 'https://a.tile.openstreetmap.org/'
+    }));
     viewer.scene.mode = SceneMode.SCENE2D;
 
     const pathPosition = new SampledPositionProperty();
@@ -94,7 +94,8 @@ class CesiumPage extends Component {
 
       this.setState({
         viewer,
-        entity
+        entity,
+        mapLayer
       });
       setTimeout(() => {
         viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1;
@@ -121,7 +122,11 @@ class CesiumPage extends Component {
         { this.state.loaded ? '' : <div className="overlay"></div> }
         <div className={`pageContainer ${this.state.loaded ? '' : 'notLoaded'}`} >
           {this.state.viewer && this.state.entity &&
-            <Controls viewer={this.state.viewer} entity={this.state.entity} />
+            <Controls
+              viewer={this.state.viewer}
+              entity={this.state.entity}
+              mapLayer={this.state.mapLayer}
+            />
           }
           <Navigation active='missioncontrol' />
           <Preamble />
