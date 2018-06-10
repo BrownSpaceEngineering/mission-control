@@ -50,7 +50,7 @@ class CesiumPage extends Component {
       infoBox: false,
       sceneModePicker: false,
       imageryProvider : new createOpenStreetMapImageryProvider({
-          url : 'http://1.basemaps.cartocdn.com/light_all/'
+          url : 'https://a.tile.openstreetmap.org/'
       }),
     });
 
