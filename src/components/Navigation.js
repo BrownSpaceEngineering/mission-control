@@ -16,10 +16,11 @@ class Navigation extends Component {
       <div className="navigation">
         <div className="logo">
           <a href="http://www.brownspace.org" target="_blank" rel="noopener noreferrer">
-          <img src={logo} width="35px" height="35px" alt="logo" /></a>
+            <img src={logo} alt="logo" />
+          </a>
         </div>
         <div className="links">
-          <Link to="/" className={this.props.active === 'missioncontrol' ? 'active' : ''}>Mission Control</Link>
+          <Link to="/" className={this.props.active === 'missioncontrol' ? 'active' : ''}>Map</Link>
           <Link to="/cad" className={this.props.active === 'cad' ? 'active' : ''}>CAD</Link>
           <Link to="/data" className={this.props.active === 'data' ? 'active' : ''}>Data</Link>
         </div>
