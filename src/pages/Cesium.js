@@ -78,7 +78,7 @@ class CesiumPage extends Component {
     }).then((result) => {
       const position = Cartesian3.fromDegrees(result.longitude,
                                               result.latitude,
-                                              result.altitude);
+                                              result.altitude * 1000);
 
       const entity = viewer.entities.add({
         position,
@@ -107,7 +107,7 @@ class CesiumPage extends Component {
         }).then((result2) => {
           const position2 = Cartesian3.fromDegrees(result2.longitude,
                                                    result2.latitude,
-                                                   result2.altitude);
+                                                   result2.altitude * 1000);
           pathPosition.addSample(JulianDate.now(), position2);
           entity.position = position2;
           viewer.trackedEntity = entity;
