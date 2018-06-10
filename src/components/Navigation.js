@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import '../assets/Navigation.css';
 
 import logo from '../assets/images/bse_white.png';
+import satLogo from '../assets/images/sat_logo.png';
 import facebook from '../assets/images/facebook.png';
 import twitter from '../assets/images/twitter.png';
 import github from '../assets/images/github.png';
@@ -14,9 +15,12 @@ class Navigation extends Component {
   render() {
     return (
       <div className="navigation">
-        <div className="logo">
+        <div className="logos">
           <a href="http://www.brownspace.org" target="_blank" rel="noopener noreferrer">
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="logo" className="bseLogo" />
+          </a>
+          <a href="http://www.brownspace.org/equisat" target="_blank" rel="noopener noreferrer">
+            <img src={satLogo} alt="equisat" className="satLogo" />
           </a>
         </div>
         <div className="links">
