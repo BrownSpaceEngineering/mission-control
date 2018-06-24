@@ -13,3 +13,11 @@
     opacity: 0.8;
     text-align: center;
 }
+
+.equisat h4 {
+    margin-top: 0em;
+}
+
+.equisat p {
+    font-size: 0.75em;
+}

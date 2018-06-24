@@ -24,10 +24,32 @@ class CesiumPage extends Component {
     super(props);
     this.state = {
       loaded: false,
+      riseTime: '',
+      maxTime: '',
+      setTime: '',
     };
   }
 
   componentDidMount() {
+
+    fetch('https://ipapi.co/json/').then((res) => {
+      return res.json();
+    }).then((res) => {
+      return fetch(`http://35.192.71.2:3000/api/get_next_pass/ISS%20(ZARYA)/${res.latitude},${res.longitude},0`);
+    }).then((res) => {
+      return res.json();
+    }).then((res) => {
+      console.log(res);
+      const riseDate = new Date(res.rise_time * 1000);
+      const maxDate = new Date(res.max_alt_time * 1000);
+      const setDate = new Date(res.set_time * 1000);
+      this.setState({
+        riseTime: riseDate.toString(),
+        maxTime: maxDate.toString(),
+        setTime: setDate.toString(),
+      });
+    });
+
     setTimeout(() => {
       console.log("Loaded");
       this.setState({
@@ -54,6 +76,7 @@ class CesiumPage extends Component {
     const mapLayer = viewer.scene.imageryLayers.addImageryProvider(new createOpenStreetMapImageryProvider({
         url : 'https://a.tile.openstreetmap.org/'
     }));
+    mapLayer.alpha = 0;
     viewer.scene.mode = SceneMode.SCENE2D;
 
     const pathPosition = new SampledPositionProperty();
@@ -131,7 +154,7 @@ class CesiumPage extends Component {
           <Preamble />
           <CurrentData />
           <TrackingData />
-          <Equisat />
+          <Equisat setTime={this.state.setTime} riseTime={this.state.riseTime} maxTime={this.state.maxTime} />
           <div id="cesiumContainer"></div>
         </div>
       </div>

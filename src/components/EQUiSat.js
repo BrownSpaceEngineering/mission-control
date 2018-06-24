@@ -8,9 +8,10 @@ class EQUiSat extends Component {
   render() {
     return (
       <div className='equisat'>
-        <h1>EQUiSat</h1>
-        <h3>LAUNCHED 05.20.2018</h3>
-        <h3>MISSION CONTROL</h3>
+        <h3>Time to next overhead:</h3>
+        <h4>{this.props.maxTime}</h4>
+        <p>Rise time: {this.props.riseTime}</p>
+        <p>Set time: {this.props.setTime}</p>
       </div>
     );
   }
