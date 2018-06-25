@@ -25,40 +25,21 @@ class CesiumPage extends Component {
     super(props);
     this.state = {
       loaded: false,
-      riseTime: '',
-      maxTime: '',
-      setTime: '',
       longitude: 0,
       latitude: 0,
       altitude: 0,
+      velocity: 0,
     };
   }
 
   componentDidMount() {
-    fetch('https://ipapi.co/json/').then((res) => {
-      return res.json();
-    }).then((res) => {
-      return fetch(`http://35.192.71.2:3000/api/get_next_pass/ISS%20(ZARYA)/${res.latitude},${res.longitude},0`);
-    }).then((res) => {
-      return res.json();
-    }).then((res) => {
-      const riseDate = new Date(res.rise_time * 1000);
-      const maxDate = new Date(res.max_alt_time * 1000);
-      const setDate = new Date(res.set_time * 1000);
-      this.setState({
-        riseTime: riseDate.toString(),
-        maxTime: maxDate.toString(),
-        setTime: setDate.toString(),
-      });
-    });
-
     setTimeout(() => {
-      console.log("Loaded");
       this.setState({
         loaded: true,
       });
     }, 3000);
 
+    // Loading viewer and map layers
     Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
                              'eyJqdGkiOiJmODc5NzI3ZS05NTQzLTQxNGEtO' +
                              'DQzNC1hNThkNjAxZTljZDYiLCJpZCI6MTQyMS' +
@@ -100,7 +81,7 @@ class CesiumPage extends Component {
 
     const tlejs = new TLEJS();
     const tleStr = 'ISS (ZARYA)\n1 25544U 98067A   18167.57342809  .00001873  00000-0  35452-4 0  9993\n2 25544  51.6416  21.7698 0002962 191.5103 260.7459 15.54186563118420';
-    const orbitLines = tlejs.getGroundTrackLngLat(tleStr, 1000);
+    const orbitLines = tlejs.getGroundTrackLngLat(tleStr, 5000);
     let currentLoc = tlejs.getLatLon(tleStr);
 
     for (let i = 0; i < orbitLines[1].length; i++) {
@@ -113,10 +94,10 @@ class CesiumPage extends Component {
     }
 
     // Fetch position area
-    console.log(currentLoc);
+    currentLoc = tlejs.getSatelliteInfo(tleStr, Date.now(), 0, 0, 0);
     const position = Cartesian3.fromDegrees(currentLoc.lng,
                                             currentLoc.lat,
-                                            400 * 1000);
+                                            currentLoc.height * 1000);
     pathPosition.addSample(JulianDate.now(), position);
 
     const entity = viewer.entities.add({
@@ -126,10 +107,10 @@ class CesiumPage extends Component {
         scale: 100,
         minimumPixelSize: 100,
       },
+      viewFrom: new Cartesian3(0.0, 0.0, 15000000.0),
     });
 
-    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 15000000;
-    viewer.trackedEntity = entity;
+    viewer.camera.lookAt(position, new Cartesian3(0.0, 0.0, 15000000.0));
 
     this.setState({
       viewer,
@@ -137,26 +118,28 @@ class CesiumPage extends Component {
       mapLayer,
       longitude: currentLoc.lng,
       latitude: currentLoc.lat,
-      altitude: 400 * 1000,
+      altitude: currentLoc.height,
+      velocity: currentLoc.velocity,
     });
 
     setTimeout(() => {
       viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1;
-    }, 1000);
+    }, 3000);
 
     setInterval(() => {
-      let currentLoc = tlejs.getLatLon(tleStr);
-      const position2 = Cartesian3.fromDegrees(currentLoc.lng,
+      const currentLoc = tlejs.getSatelliteInfo(tleStr, Date.now(), 0, 0, 0);
+      const position = Cartesian3.fromDegrees(currentLoc.lng,
                                                currentLoc.lat,
-                                               400 * 1000);
-      pathPosition.addSample(JulianDate.now(), position2);
-      entity.position = position2;
+                                               currentLoc.height * 1000);
+      pathPosition.addSample(JulianDate.now(), position);
+      entity.position = position;
       viewer.trackedEntity = entity;
 
       this.setState({
         longitude: currentLoc.lng,
         latitude: currentLoc.lat,
-        altitude: 400 * 1000,
+        altitude: currentLoc.height,
+        velocity: currentLoc.velocity,
       });
     }, 1000);
   }
@@ -180,8 +163,9 @@ class CesiumPage extends Component {
             lon={this.state.longitude}
             lat={this.state.latitude}
             alt={this.state.altitude}
+            velocity={this.state.velocity}
           />
-          <Equisat setTime={this.state.setTime} riseTime={this.state.riseTime} maxTime={this.state.maxTime} />
+          <Equisat />
           <div id="cesiumContainer"></div>
         </div>
       </div>
