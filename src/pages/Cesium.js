@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TLEJS from 'tle.js';
 
 import Navigation from '../components/Navigation';
 import Preamble from '../components/Preamble';
@@ -27,11 +28,13 @@ class CesiumPage extends Component {
       riseTime: '',
       maxTime: '',
       setTime: '',
+      longitude: 0,
+      latitude: 0,
+      altitude: 0,
     };
   }
 
   componentDidMount() {
-
     fetch('https://ipapi.co/json/').then((res) => {
       return res.json();
     }).then((res) => {
@@ -39,7 +42,6 @@ class CesiumPage extends Component {
     }).then((res) => {
       return res.json();
     }).then((res) => {
-      console.log(res);
       const riseDate = new Date(res.rise_time * 1000);
       const maxDate = new Date(res.max_alt_time * 1000);
       const setDate = new Date(res.set_time * 1000);
@@ -79,6 +81,7 @@ class CesiumPage extends Component {
     mapLayer.alpha = 0;
     viewer.scene.mode = SceneMode.SCENE2D;
 
+    // Fetch path area
     const pathPosition = new SampledPositionProperty();
     viewer.entities.add({
       position: pathPosition,
@@ -95,47 +98,67 @@ class CesiumPage extends Component {
       },
     });
 
-    fetch('http://35.192.71.2:3000/api/get_lonlatalt/ISS%20(ZARYA)').then((result) => {
-      return result.json();
-    }).then((result) => {
-      const position = Cartesian3.fromDegrees(result.longitude,
-                                              result.latitude,
-                                              result.altitude * 1000);
+    const tlejs = new TLEJS();
+    const tleStr = 'ISS (ZARYA)\n1 25544U 98067A   18167.57342809  .00001873  00000-0  35452-4 0  9993\n2 25544  51.6416  21.7698 0002962 191.5103 260.7459 15.54186563118420';
+    const orbitLines = tlejs.getGroundTrackLngLat(tleStr, 1000);
+    let currentLoc = tlejs.getLatLon(tleStr);
 
-      const entity = viewer.entities.add({
-        position,
-        model: {
-          uri: '/cad/sat.gltf',
-          scale: 100,
-          minimumPixelSize: 100,
-        },
-      });
+    for (let i = 0; i < orbitLines[1].length; i++) {
+      const each = orbitLines[1][i]
+      const position = Cartesian3.fromDegrees(each[0], each[1], 400 * 1000);
+      pathPosition.addSample(JulianDate.now(), position);
+      if (Math.sqrt(Math.pow((each[0] - currentLoc.lng), 2) + Math.pow((each[1] - currentLoc.lat), 2)) < 1) {
+        break;
+      }
+    }
 
-      viewer.scene.screenSpaceCameraController.minimumZoomDistance = 15000000;
+    // Fetch position area
+    console.log(currentLoc);
+    const position = Cartesian3.fromDegrees(currentLoc.lng,
+                                            currentLoc.lat,
+                                            400 * 1000);
+    pathPosition.addSample(JulianDate.now(), position);
+
+    const entity = viewer.entities.add({
+      position,
+      model: {
+        uri: '/cad/sat.gltf',
+        scale: 100,
+        minimumPixelSize: 100,
+      },
+    });
+
+    viewer.scene.screenSpaceCameraController.minimumZoomDistance = 15000000;
+    viewer.trackedEntity = entity;
+
+    this.setState({
+      viewer,
+      entity,
+      mapLayer,
+      longitude: currentLoc.lng,
+      latitude: currentLoc.lat,
+      altitude: 400 * 1000,
+    });
+
+    setTimeout(() => {
+      viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1;
+    }, 1000);
+
+    setInterval(() => {
+      let currentLoc = tlejs.getLatLon(tleStr);
+      const position2 = Cartesian3.fromDegrees(currentLoc.lng,
+                                               currentLoc.lat,
+                                               400 * 1000);
+      pathPosition.addSample(JulianDate.now(), position2);
+      entity.position = position2;
       viewer.trackedEntity = entity;
 
       this.setState({
-        viewer,
-        entity,
-        mapLayer
+        longitude: currentLoc.lng,
+        latitude: currentLoc.lat,
+        altitude: 400 * 1000,
       });
-      setTimeout(() => {
-        viewer.scene.screenSpaceCameraController.minimumZoomDistance = 1;
-      }, 1000);
-
-      setInterval(() => {
-        fetch('http://35.192.71.2:3000/api/get_lonlatalt/ISS%20(ZARYA)').then((result2) => {
-          return result2.json();
-        }).then((result2) => {
-          const position2 = Cartesian3.fromDegrees(result2.longitude,
-                                                   result2.latitude,
-                                                   result2.altitude * 1000);
-          pathPosition.addSample(JulianDate.now(), position2);
-          entity.position = position2;
-          viewer.trackedEntity = entity;
-        });
-      }, 1000);
-    });
+    }, 1000);
   }
 
   render() {
@@ -153,7 +176,11 @@ class CesiumPage extends Component {
           <Navigation active='missioncontrol' />
           <Preamble />
           <CurrentData />
-          <TrackingData />
+          <TrackingData
+            lon={this.state.longitude}
+            lat={this.state.latitude}
+            alt={this.state.altitude}
+          />
           <Equisat setTime={this.state.setTime} riseTime={this.state.riseTime} maxTime={this.state.maxTime} />
           <div id="cesiumContainer"></div>
         </div>
