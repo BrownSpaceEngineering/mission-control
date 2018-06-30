@@ -106,6 +106,7 @@ class CesiumPage extends Component {
         uri: '/cad/sat.gltf',
         scale: 100,
         minimumPixelSize: 100,
+        maximumScale: 10000000,
       },
       viewFrom: new Cartesian3(0.0, 0.0, 15000000.0),
     });
