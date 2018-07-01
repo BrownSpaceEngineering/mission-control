@@ -20,10 +20,30 @@ body {
     padding-top: 8vh;
     display: grid;
     grid-template-columns: 22% auto 22%;
-    grid-template-rows: 45% 45% 0%;
     justify-items: stretch;
-    font-size: 16px;
 }
+
+@media (min-width: 1024px) {
+    .pageContainer {
+        font-size: 0.8em;
+        grid-auto-rows: 46vh;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .pageContainer {
+        font-size: 0.6em;
+        grid-auto-rows: 46vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .pageContainer {
+        font-size: 0.5em;
+        grid-auto-rows: 20vh;
+    }
+}
+
 
 .notLoaded {
     opacity: 0;

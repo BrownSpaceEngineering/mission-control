@@ -1,14 +1,26 @@
 .trackingData {
     z-index: 3;
-    padding: 0 20px 0 20px;
     margin: 20px;
+    padding: 0 20px 0 20px;
     background-color: black;
     color: #00DDFF;
     text-shadow: 0 0 5px #00FFFF;
     border: 3px solid #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 0 10px #EEEEEE;
-    grid-column: 3/4;
-    grid-row: 1/2;
     opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+    .trackingData {
+        grid-column: 3;
+        grid-row: 1 / 3;
+    }
+}
+
+@media (max-width: 768px) {
+    .trackingData {
+        grid-column: 1 / 3;
+        grid-row: 1;
+    }
 }

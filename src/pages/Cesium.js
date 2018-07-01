@@ -297,8 +297,9 @@ class CesiumPage extends Component {
             lat={this.state.latitude}
             alt={this.state.altitude}
             velocity={this.state.velocity}
+            homeLocation={this.state.homeLocation}
+            pinLocation={this.state.pinLocation}
           />
-          <Equisat homeLocation={this.state.homeLocation} pinLocation={this.state.pinLocation}/>
           <div id="cesiumContainer"></div>
         </div>
       </div>
