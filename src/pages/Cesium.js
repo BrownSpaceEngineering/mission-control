@@ -56,8 +56,6 @@ class CesiumPage extends Component {
   }
 
   setInitialPinLocation(viewer) {
-    let city;
-
     fetch('https://ipapi.co/json/').then((res) => {
       return res.json();
     }).then((res) => {
@@ -257,7 +255,11 @@ class CesiumPage extends Component {
           if (data.results.length === 0) {
             city = '';
           } else {
-            city = data.results[1].formatted_address;
+            if (data.results.length < 2) {
+              city = data.results[0].formatted_address;
+            } else {
+              city = data.results[1].formatted_address;
+            }
             city = city.substr(0, city.lastIndexOf(","));
           }
           console.log(city);

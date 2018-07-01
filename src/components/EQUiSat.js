@@ -25,20 +25,34 @@ class EQUiSat extends Component {
       } else {
         locToSearch = newProps.pinLocation;
       }
-      const newCity = locToSearch.city;
+
+      let newCity;
+      if (locToSearch.city.length === 0) {
+        newCity = `${locToSearch.lon.toFixed(2)}, ${locToSearch.lat.toFixed(2)}`;
+      } else {
+        newCity = locToSearch.city;
+      }
       fetch(`http://tracking.brownspace.org/api/get_next_pass/ISS%20(ZARYA)/${locToSearch.lon},${locToSearch.lat},0`).then((res) => {
-        console.log(res);
-        return res.json();
-      }).then((res) => {
-        const riseDate = new Date(res.rise_time * 1000);
-        const maxDate = new Date(res.max_alt_time * 1000);
-        const setDate = new Date(res.set_time * 1000);
-        this.setState({
-          riseTime: riseDate.toString(),
-          maxTime: maxDate.toString(),
-          setTime: setDate.toString(),
-          city: newCity,
-        });
+        if (res.status === 200) {
+          res.json().then((res) => {
+            const riseDate = new Date(res.rise_time * 1000);
+            const maxDate = new Date(res.max_alt_time * 1000);
+            const setDate = new Date(res.set_time * 1000);
+            this.setState({
+              riseTime: riseDate.toString(),
+              maxTime: maxDate.toString(),
+              setTime: setDate.toString(),
+              city: newCity,
+            });
+          });
+        } else {
+          this.setState({
+            city: newCity,
+            maxTime: 'Not anytime soon',
+            riseTime: '',
+            setTime: ''
+          });
+        }
       });
     }
   }
@@ -48,8 +62,12 @@ class EQUiSat extends Component {
       <div className='equisat'>
         <h3>Time to next overhead ({this.state.city}):</h3>
         <h4>{this.state.maxTime}</h4>
-        <p>Rise time: {this.state.riseTime}</p>
-        <p>Set time: {this.state.setTime}</p>
+        { this.state.riseTime.length > 0 &&
+          <p>Rise time: {this.state.riseTime}</p>
+        }
+        { this.state.setTime.length > 0 &&
+          <p>Set time: {this.state.setTime}</p>
+        }
       </div>
     );
   }
