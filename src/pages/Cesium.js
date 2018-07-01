@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import TLEJS from 'tle.js';
+import geocoder from 'geocoder';
+import {geolocated} from 'react-geolocated';
 
 import Navigation from '../components/Navigation';
 import Preamble from '../components/Preamble';
@@ -18,7 +20,9 @@ import Cartesian3 from "cesium/Source/Core/Cartesian3";
 import JulianDate from "cesium/Source/Core/JulianDate";
 import SceneMode from "cesium/Source/Scene/SceneMode";
 import createOpenStreetMapImageryProvider from "cesium/Source/Scene/createOpenStreetMapImageryProvider"
-import IonImageryProvider from "cesium/Source/Scene/IonImageryProvider";
+import ScreenSpaceEventType from "cesium/Source/Core/ScreenSpaceEventType"
+import CesiumMath from "cesium/Source/Core/Math"
+import VerticalOrigin from "cesium/Source/Scene/VerticalOrigin"
 
 class CesiumPage extends Component {
   constructor(props) {
@@ -29,10 +33,51 @@ class CesiumPage extends Component {
       latitude: 0,
       altitude: 0,
       velocity: 0,
+      viewer: null,
+      entity: null,
+      mapLayer: null,
       locked: true,
+      homeLocation: {
+        lon: null,
+        lat: null,
+        city: null,
+      },
+      pinLocation: {
+        lon: null,
+        lat: null,
+        city: null,
+      },
+      pin: null,
+      receivedGeolocation: false,
     };
 
     this.toggleLocked = this.toggleLocked.bind(this);
+    this.setInitialPinLocation = this.setInitialPinLocation.bind(this);
+  }
+
+  setInitialPinLocation(viewer) {
+    let city;
+
+    fetch('https://ipapi.co/json/').then((res) => {
+      return res.json();
+    }).then((res) => {
+      const pin = viewer.entities.add({
+        position : Cartesian3.fromDegrees(res.longitude, res.latitude),
+        billboard : {
+            image : '/pin.png',
+            verticalOrigin : VerticalOrigin.BOTTOM
+        }
+      });
+
+      this.setState({
+        homeLocation: {
+          lon: res.longitude,
+          lat: res.latitude,
+          city: res.city,
+        },
+        pin
+      });
+    });
   }
 
   toggleLocked() {
@@ -80,6 +125,25 @@ class CesiumPage extends Component {
       sceneModePicker: false,
     });
 
+    // Set pin
+    this.setInitialPinLocation(viewer);
+    const timer = setInterval(() => {
+      if (this.props.isGeolocationAvailable && this.props.isGeolocationEnabled &&
+        this.props.coords && !this.state.receivedGeolocation && this.state.pin) {
+        this.state.pin.position = Cartesian3.fromDegrees(this.props.coords.longitude, this.props.coords.latitude);
+        this.setState({
+          receivedGeolocation: true,
+          homeLocation: {
+            lon: this.props.coords.longitude,
+            lat: this.props.coords.latitude,
+            city: this.state.homeLocation.city
+          }
+        });
+        clearInterval(timer);
+      }
+    }, 1000);
+
+    // Set map layers
     const mapLayer = viewer.scene.imageryLayers.addImageryProvider(new createOpenStreetMapImageryProvider({
         url : 'https://a.tile.openstreetmap.org/'
     }));
@@ -169,6 +233,44 @@ class CesiumPage extends Component {
         velocity: currentLoc.velocity,
       });
     }, 1000);
+
+    // Left click event handler
+    viewer.screenSpaceEventHandler.setInputAction((movement) => {
+      const ellipsoid = viewer.scene.globe.ellipsoid;
+      const cartesian = viewer.camera.pickEllipsoid(movement.position, ellipsoid);
+      if (cartesian && this.state.pin) {
+        const cartographic = ellipsoid.cartesianToCartographic(cartesian);
+        let lon = CesiumMath.toDegrees(cartographic.longitude);
+        let lat = CesiumMath.toDegrees(cartographic.latitude);
+
+        // Weirdo bug with 2D. Coordinates returned are relative to the satellite.
+        if (viewer.scene.mode === SceneMode.SCENE2D && this.state.locked === true) {
+          lon = this.state.longitude + lon;
+          lat = this.state.latitude + lat;
+        }
+
+        const position = Cartesian3.fromDegrees(lon, lat);
+        this.state.pin.position = position;
+        geocoder.reverseGeocode(lat, lon, (err, data) => {
+          console.log(data);
+          let city;
+          if (data.results.length === 0) {
+            city = '';
+          } else {
+            city = data.results[1].formatted_address;
+            city = city.substr(0, city.lastIndexOf(","));
+          }
+          console.log(city);
+          this.setState({
+            pinLocation: {
+              city,
+              lat,
+              lon
+            }
+          });
+        });
+      }
+    }, ScreenSpaceEventType.LEFT_CLICK);
   }
 
   render() {
@@ -194,7 +296,7 @@ class CesiumPage extends Component {
             alt={this.state.altitude}
             velocity={this.state.velocity}
           />
-          <Equisat />
+          <Equisat homeLocation={this.state.homeLocation} pinLocation={this.state.pinLocation}/>
           <div id="cesiumContainer"></div>
         </div>
       </div>
@@ -202,4 +304,9 @@ class CesiumPage extends Component {
   }
 }
 
-export default CesiumPage;
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: true,
+  },
+  userDecisionTimeout: 20000,
+})(CesiumPage);
