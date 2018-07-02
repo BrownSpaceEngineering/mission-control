@@ -2,12 +2,18 @@
     position: absolute;
     z-index: 3;
     bottom: 10vh;
-    right: 22vw;
+    right: 1vw;
     display:grid;
-    grid-template-columns: 80px 80px 80px;
+    grid-template-columns: auto 80px;
     grid-row: auto auto;
     grid-column-gap: 20px;
     grid-row-gap: 20px;
+}
+
+.controls .labels {
+    color: white;
+    text-align: right;
+    line-height: 30px;
 }
 
 .button {

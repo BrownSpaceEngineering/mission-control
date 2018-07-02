@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import TLEJS from 'tle.js';
-import Switch from 'rc-switch';
+import Switch from 'react-switch';
 
-import 'rc-switch/assets/index.css'
 import '../assets/Controls.css';
 
 import Cartesian3 from "cesium/Source/Core/Cartesian3";
@@ -12,6 +11,11 @@ class Controls extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      mapChecked: false,
+      threeDimensionChecked: false,
+    };
 
     this.onChangeDimension = this.onChangeDimension.bind(this);
     this.onChangeMapLayer = this.onChangeMapLayer.bind(this);
@@ -36,6 +40,9 @@ class Controls extends Component {
         this.props.viewer.trackedEntity = this.props.entity;
       }
     }
+    this.setState({
+      threeDimensionChecked: value,
+    });
   }
 
   onChangeMapLayer(value) {
@@ -45,26 +52,34 @@ class Controls extends Component {
     } else {
       this.props.mapLayer.alpha = 0;
     }
+    this.setState({
+      mapChecked: value,
+    });
   }
 
   render() {
     return (
       <div className='controls'>
+        <div className='labels'>
+          Lock to satellite
+        </div>
         <Switch
           onChange={this.props.toggleLocked}
-          checked={!this.props.locked}
-          checkedChildren={'Unlocked'}
-          unCheckedChildren={'Locked'}
+          checked={this.props.locked}
         />
+        <div className='labels'>
+          Map layer
+        </div>
         <Switch
           onChange={this.onChangeMapLayer}
-          checkedChildren={'Map'}
-          unCheckedChildren={'Sat'}
+          checked={this.state.mapChecked}
         />
+        <div className='labels'>
+          3D View
+        </div>
         <Switch
           onChange={this.onChangeDimension}
-          checkedChildren={'3D'}
-          unCheckedChildren={'2D'}
+          checked={this.state.threeDimensionChecked}
         />
       </div>
     );

@@ -6,6 +6,8 @@
     position: absolute;
     width: 100vw;
     height: 100vh;
+    top: 0;
+    left: 0;
 }
 
 body {
@@ -18,15 +20,35 @@ body {
     height: 100vh;
     background-color: black;
     padding-top: 8vh;
+}
+
+.leftBar {
+    position: fixed;
+    z-index: 10;
+    height: 92vh;
+    top: 8vh;
+    left: 0;
+    width: 22vw;
     display: grid;
-    grid-template-columns: 22% auto 22%;
-    justify-items: stretch;
+    grid-template-columns: 100%;
+    grid-auto-rows: min-content;
+}
+
+.rightBar {
+    position: fixed;
+    z-index: 10;
+    top: 8vh;
+    right: 0;
+    width: 22vw;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-auto-rows: min-content;
 }
 
 @media (min-width: 1024px) {
     .pageContainer {
         font-size: 0.8em;
-        grid-auto-rows: 46vh;
+        grid-auto-rows: auto;
     }
 }
 
@@ -55,5 +77,6 @@ body {
     width: 100vw;
     background-image: url('../assets/images/bse_wallpaper.jpg');
     background-size: cover;
+    background-position: center;
     z-index: 9999;
 }

@@ -290,16 +290,20 @@ class CesiumPage extends Component {
             />
           }
           <Navigation active='missioncontrol' />
-          <Preamble />
-          <CurrentData />
-          <TrackingData
-            lon={this.state.longitude}
-            lat={this.state.latitude}
-            alt={this.state.altitude}
-            velocity={this.state.velocity}
-            homeLocation={this.state.homeLocation}
-            pinLocation={this.state.pinLocation}
-          />
+          <div className="leftBar">
+            <Preamble />
+            <CurrentData />
+          </div>
+          <div className='rightBar'>
+            <TrackingData
+              lon={this.state.longitude}
+              lat={this.state.latitude}
+              alt={this.state.altitude}
+              velocity={this.state.velocity}
+              homeLocation={this.state.homeLocation}
+              pinLocation={this.state.pinLocation}
+            />
+          </div>
           <div id="cesiumContainer"></div>
         </div>
       </div>
