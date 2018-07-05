@@ -1,7 +1,5 @@
 .trackingData {
     z-index: 3;
-    margin: 20px;
-    padding: 0 20px 0 20px;
     background-color: black;
     color: #00DDFF;
     text-shadow: 0 0 5px #00FFFF;
@@ -14,11 +12,14 @@
 @media (min-width: 768px) {
     .trackingData {
         grid-column: 1;
+        margin: 20px;
+        padding: 0 20px 0 20px;
     }
 }
 
 @media (max-width: 768px) {
     .trackingData {
+        padding: 0 20px 0 20px;
         grid-column: 1 / 3;
     }
 }

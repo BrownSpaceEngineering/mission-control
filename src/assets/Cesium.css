@@ -34,15 +34,30 @@ body {
     grid-auto-rows: min-content;
 }
 
-.rightBar {
-    position: fixed;
-    z-index: 10;
-    top: 8vh;
-    right: 0;
-    width: 22vw;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-auto-rows: min-content;
+@media (min-width: 768px) {
+    .rightBar {
+        position: fixed;
+        z-index: 10;
+        top: 8vh;
+        right: 0;
+        width: 22vw;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-auto-rows: min-content;
+    }
+}
+
+@media (max-width: 768px) {
+    .rightBar {
+        position: fixed;
+        z-index: 10;
+        top: 8vh;
+        right: 40px;
+        width: 30vw;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-auto-rows: min-content;
+    }
 }
 
 @media (min-width: 1024px) {
