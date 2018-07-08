@@ -51,8 +51,8 @@ body {
     .rightBar {
         position: fixed;
         z-index: 10;
-        top: 8vh;
-        right: 40px;
+        top: 60px;
+        left: 0;
         width: 30vw;
         display: grid;
         grid-template-columns: 100%;

@@ -1,0 +1,105 @@
+.navigationMobile {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 94vw;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 8px 1px #111111;
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  font-size: 18px;
+}
+
+.navigationMobile .logos {
+  grid-column: 1;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+}
+
+.navigationMobile .bseLogo {
+  width: 35px;
+  height: 35px;
+  margin-right: 20px;
+}
+
+.bseLogo:hover {
+  opacity: 0.7;
+}
+
+.navigationMobile .links {
+  grid-column: 2;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+}
+
+.navigationMobile .links a {
+  margin: 0 5px 0 5px;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.navigationMobile .links a.active {
+  color: #6aa2c8;
+}
+
+.navigationMobile .links a:hover {
+  color: #aaaaaa;
+}
+
+.navigationMobile .social {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+}
+
+.navigationMobile .social img:hover {
+  opacity: 0.7;
+}
+
+.socialModal {
+  border-radius: 10px;
+  background-color: rgba(10, 10, 10, 0.9);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  display: grid;
+  grid-template-columns: 50px 50px 50px;
+  padding: 20px;
+}
+
+.socialModal a {
+  display: flex;
+  justify-content: center;
+}
+
+.navigationMobile .settings {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.socialModalOverlay {
+  position: fixed;
+  z-index: 998;
+  height: calc(100vh - 50px);
+  width: 100vw;
+  top: 50px;
+  left: 0;
+  opacity: 0;
+}
+
+.satLogo {
+  width: 32px;
+  height: 32px;
+  filter: invert(100%);
+}

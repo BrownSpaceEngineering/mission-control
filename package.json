@@ -41,6 +41,7 @@
     "react-dev-utils": "^5.0.1",
     "react-dom": "^16.4.0",
     "react-geolocated": "^2.4.0",
+    "react-responsive": "^4.1.0",
     "react-router-dom": "^4.3.1",
     "react-switch": "^3.0.4",
     "request-ip": "^2.0.2",

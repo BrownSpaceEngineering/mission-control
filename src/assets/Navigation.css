@@ -10,35 +10,35 @@
   background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 8px 1px #111111;
   display: grid;
-  grid-template-columns: 20% auto 20%;
+  grid-template-columns: 40% 20% 40%;
   align-items: center;
   font-size: 24px;
 }
 
-.logos {
+.navigation .logos {
   grid-column: 1/2;
   justify-self: start;
   height: 35px;
 }
 
-.bseLogo {
+.navigation .bseLogo {
   width: 35px;
   height: 35px;
   margin-right: 20px;
 }
 
-.satLogo {
+.navigation .satLogo {
   width: 32px;
   height: 32px;
   margin-right: 10px;
   filter: invert(100%);
 }
 
-.bseLogo:hover, .satLogo:hover {
+.navigation .bseLogo:hover, .navigation .satLogo:hover {
   opacity: 0.7;
 }
 
-.links {
+.navigation .links {
   grid-column: 2/3;
   justify-self: center;
   display: grid;
@@ -46,30 +46,30 @@
   grid-template-columns: auto auto auto;
 }
 
-.links a {
+.navigation .links a {
   color: #ffffff;
   text-align: center;
   text-decoration: none;
 }
 
-.links a.active {
+.navigation .links a.active {
   color: #6aa2c8;
 }
 
-.links a:hover {
+.navigation .links a:hover {
   color: #aaaaaa;
 }
 
-.social {
+.navigation .social {
   grid-column: 3/4;
   justify-self: end;
   height: 35px;
 }
 
-.social img {
+.navigation .social img {
   margin: 0 10px;
 }
 
-.social img:hover {
+.navigation .social img:hover {
   opacity: 0.7;
 }

@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import TLEJS from 'tle.js';
 import geocoder from 'geocoder';
 import {geolocated} from 'react-geolocated';
+import MediaQuery from 'react-responsive';
 
 import Navigation from '../components/Navigation';
+import NavigationMobile from '../components/NavigationMobile';
 import Preamble from '../components/Preamble';
 import CurrentData from '../components/CurrentData';
 import TrackingData from '../components/TrackingData';
@@ -289,7 +291,12 @@ class CesiumPage extends Component {
               locked={this.state.locked}
             />
           }
-          <Navigation active='missioncontrol' />
+          <MediaQuery query="(min-width: 769px)">
+            <Navigation active='missioncontrol' />
+          </MediaQuery>
+          <MediaQuery query="(max-width: 769px)">
+            <NavigationMobile active='missioncontrol' />
+          </MediaQuery>
           <div className="leftBar">
             <Preamble />
             <CurrentData />
