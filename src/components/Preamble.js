@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { getPreambleData } from '../utils/EQUiSatAPI';
+
 import '../assets/Preamble.css';
 import '../assets/Data.css';
 
@@ -7,24 +9,31 @@ class Preamble extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      callsign: "WL9XZE",
-      messageType: "LOW_POWER",
-      satelliteState: "ANTENNA_DEPLOY",
-      timestamp: "0.000"
+      callsign: "",
+      messageType: "",
+      satelliteState: "",
+      timestamp: ""
     }
   }
 
-  // updateCallsign = () => {
-  //
-  // }
+  formatSeconds(seconds) {
+    function z(n) {return (n < 10 ? '0' : '') + n;}
+    return z(seconds / 3600 | 0) + ' hours ' + z((seconds % 3600) / 60 | 0) + ' minutes'
+  }
 
-  // updateMessageType = () => {
-  //
-  // }
-
-  // updateSatelliteState = () => {
-  //
-  // }
+  componentDidMount() {
+    getPreambleData(null, 1).then((res) => {
+      if (res.status === 200) {
+        const data = res.data[0].preamble;
+        this.setState({
+          callsign: data.callsign,
+          messageType: data.message_type,
+          satelliteState: data.satellite_state,
+          timestamp: this.formatSeconds(data.timestamp)
+        });
+      }
+    });
+  }
 
   render() {
     return (
@@ -40,7 +49,7 @@ class Preamble extends Component {
         <span className="data"> {this.state.satelliteState}</span>
         <br /> <br />
         Time Since Last Satellite Start:
-        <span className="data"> {this.state.timestamp}sec</span>
+        <span className="data"> {this.state.timestamp}</span>
         <br /> <br />
       </div>
     );

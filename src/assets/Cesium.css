@@ -28,7 +28,7 @@ body {
     height: 92vh;
     top: 8vh;
     left: 0;
-    width: 22vw;
+    width: 25vw;
     display: grid;
     grid-template-columns: 100%;
     grid-auto-rows: min-content;
