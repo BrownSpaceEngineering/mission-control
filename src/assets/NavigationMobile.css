@@ -4,11 +4,11 @@
   top: 0;
   left: 0;
   height: 50px;
-  width: 94vw;
+  width: 100vw;
   padding-left: 3vw;
   padding-right: 3vw;
-  background-color: rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 0px 8px 1px #111111;
+  background-color: rgba(26, 28, 34 0.5);
+  /* box-shadow: 0px 0px 8px 1px #111111; */
   display: grid;
   grid-template-columns: 10% 80% 10%;
   font-size: 18px;

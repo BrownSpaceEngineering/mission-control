@@ -1,4 +1,97 @@
-.data {
-    color: #90EE90;/*#FF9E3C;*/
-    text-shadow: 0 0 5px #98FB98; /*#FFAB55;*/
+body {
+    background-color: rgb(37, 40, 48);
+}
+
+.dataPage {
+    font-family: 'Roboto';
+    padding: 20px;
+    margin: 0;
+}
+
+.break {
+    position: relative;
+}
+
+.break p {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.dataContainer {
+}
+
+.data-navbar .text {
+    font-weight: 400;
+    color: #51586a;
+    text-transform: uppercase;
+    font-size: 85%;
+    padding-left: 15px;
+    margin-bottom: 5px;
+}
+
+.data-navbar a {
+    color: white;
+    font-weight: 300;
+}
+
+.data-navbar .active {
+    background-color: rgb(35, 152, 152);
+    border-radius: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .dataContainer {
+        margin-top: 50px;
+    }
+
+    .data-navbar {
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 768px) {
+    .dataContainer {
+        margin-top: 8vh;
+    }
+
+    .data-navbar {
+        margin-top: 15vh;
+    }
+}
+
+.dataContainer h2 {
+    color: white;
+    font-weight: 300;
+    font-size: 2em;
+    margin: 0;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.dataContainer hr {
+    border: 0;
+    border-top: 1px solid #434857;
+}
+
+.dataContainer .row {
+    margin: 50px 0 50px 0;
+}
+
+.dataContainer .graphCard {
+    text-align: center;
+    display: grid;
+}
+
+.dataContainer .graph {
+    width: 75%;
+    margin-bottom: 20px;
+    justify-self: center;
+}
+
+.dataContainer h3 {
+    color: white;
+    font-weight: 300;
+    font-size: 1.5em;
 }

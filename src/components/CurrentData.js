@@ -31,6 +31,7 @@ class CurrentData extends Component {
     getCurrentInfoData(null, 1).then((res) => {
       if (res.status === 200) {
         const data = res.data[0];
+        console.log(data);
 
         let time_to_flash;
         if (data.time_to_flash === 255) {

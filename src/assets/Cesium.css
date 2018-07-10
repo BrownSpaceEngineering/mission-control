@@ -2,6 +2,12 @@
     visibility: hidden;
 }
 
+.cesiumPage {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
 #cesiumContainer {
     position: absolute;
     width: 100vw;
@@ -10,8 +16,19 @@
     left: 0;
 }
 
-body {
-  overflow: hidden;
+.cesiumPage h1 {
+    font-weight: 700;
+    font-size: 1.5em;
+    margin-top: 0.5rem;
+}
+
+.cesiumPage h3 {
+    font-size: 1.25em;
+    margin-top: 20px;
+}
+
+.cesiumPage h4 {
+    font-size: 1.25em;
 }
 
 .pageContainer {

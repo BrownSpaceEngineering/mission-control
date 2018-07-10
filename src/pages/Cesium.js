@@ -279,7 +279,7 @@ class CesiumPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className='cesiumPage'>
         { this.state.loaded ? '' : <div className="overlay"></div> }
         <div className={`pageContainer ${this.state.loaded ? '' : 'notLoaded'}`} >
           {this.state.viewer && this.state.entity &&

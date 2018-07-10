@@ -1,7 +1,7 @@
 .controls {
     position: absolute;
     z-index: 3;
-    bottom: 10vh;
+    bottom: 3vh;
     right: 1vw;
     display:grid;
     grid-template-columns: auto 80px;
