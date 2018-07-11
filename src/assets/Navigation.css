@@ -50,10 +50,11 @@
   color: #ffffff;
   text-align: center;
   text-decoration: none;
+  font-weight: 300;
 }
 
 .navigation .links a.active {
-  color: #6aa2c8;
+  color: rgb(95, 212, 212);
 }
 
 .navigation .links a:hover {

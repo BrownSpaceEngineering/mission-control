@@ -1,0 +1,31 @@
+
+.data-navbar .text {
+    font-weight: 400;
+    color: #51586a;
+    text-transform: uppercase;
+    font-size: 85%;
+    padding-left: 15px;
+    margin-bottom: 5px;
+}
+
+.data-navbar a {
+    color: white;
+    font-weight: 300;
+}
+
+.data-navbar .active {
+    background-color: rgb(35, 152, 152);
+    border-radius: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .data-navbar {
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 768px) {
+    .data-navbar {
+        margin-top: 15vh;
+    }
+}

@@ -6,6 +6,7 @@ import { signalToName } from '../utils/HumanReadables';
 
 import Navigation from '../components/Navigation';
 import NavigationMobile from '../components/NavigationMobile';
+import DataNavbar from '../components/DataNavbar';
 import '../assets/Data.css';
 
 import * as params from '../utils/chartjs_params';
@@ -156,33 +157,8 @@ class DataPage extends Component {
         <MediaQuery query="(max-width: 769px)">
           <NavigationMobile active='data' />
         </MediaQuery>
-        <div className="col-2 data-navbar">
-          <ul className="nav flex-column">
-            <li className="nav-item text">
-              Navigation
-            </li>
-            <li className="nav-item active">
-              <a className="nav-link active" href="#">Current Data</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Preamble</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Idle Data</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Attitude</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Flash Burst</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Flash Comparison</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Low Power</a>
-            </li>
-          </ul>
+        <div className="col-2">
+          <DataNavbar active={'current-data'} />
         </div>
         <div className="dataContainer col-10">
           <h2>Current Data</h2>
