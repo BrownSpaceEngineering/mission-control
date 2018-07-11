@@ -12,6 +12,17 @@ body {
     position: relative;
 }
 
+.subtitle {
+    text-align: center;
+}
+
+.subtitle p {
+    color: #828a9f;
+    font-size: 85%;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
 .break p {
     position: absolute;
     left: 0;
@@ -79,9 +90,14 @@ body {
     margin: 50px 0 50px 0;
 }
 
+.dataContainer .row .statTitle {
+    margin-bottom: 20px;
+}
+
 .dataContainer .graphCard {
     text-align: center;
     display: grid;
+    grid-auto-rows: min-content;
 }
 
 .dataContainer .graph {
@@ -90,8 +106,50 @@ body {
     justify-self: center;
 }
 
+.dataContainer .graph.small-graph {
+    width: 60%;
+}
+
 .dataContainer h3 {
     color: white;
     font-weight: 300;
     font-size: 1.5em;
+}
+
+.dataContainer h4 {
+    color: white;
+    font-weight: 300;
+}
+
+.dataContainer h5 {
+    color: white;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+.dataContainer h5.last {
+    margin-bottom: 0;
+}
+
+.dataContainer .caption {
+    color: #828a9f;
+    font-size: 85%;
+    /* text-transform: uppercase; */
+    letter-spacing: 0.15em;
+}
+
+.dataContainer .elem-1 {
+    color: rgb(255, 99, 132);
+}
+
+.dataContainer .elem-2 {
+    color: rgb(54, 162, 235);
+}
+
+.dataContainer .elem-3 {
+    color: rgb(255, 206, 86);
+}
+
+.dataContainer .elem-4 {
+    color: rgb(75, 192, 192);
 }

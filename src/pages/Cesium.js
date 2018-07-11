@@ -9,7 +9,6 @@ import NavigationMobile from '../components/NavigationMobile';
 import Preamble from '../components/Preamble';
 import CurrentData from '../components/CurrentData';
 import TrackingData from '../components/TrackingData';
-import Equisat from '../components/EQUiSat';
 import Controls from '../components/Controls';
 import '../assets/Cesium.css';
 
