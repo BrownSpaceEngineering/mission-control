@@ -49,12 +49,6 @@ class DataPage extends Component {
           </li>
           <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
             <span
-              onClick={this.props.scrollToSection('photodiode')}
-              className="nav-link element"
-            >Photodiode</span>
-          </li>
-          <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
-            <span
               onClick={this.props.scrollToSection('misc')}
               className="nav-link element"
             >Misc</span>

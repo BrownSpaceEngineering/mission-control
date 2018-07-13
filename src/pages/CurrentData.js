@@ -12,7 +12,6 @@ import DataLiFePoBattery from '../components/DataLiFePoBattery';
 import DataLed from '../components/DataLed';
 import DataIr from '../components/DataIr';
 import DataImu from '../components/DataImu';
-import DataPhotodiode from '../components/DataPhotodiode';
 import DataMisc from '../components/DataMisc';
 import '../assets/Data.css';
 
@@ -89,8 +88,6 @@ class DataPage extends Component {
         scrollComponent = this.ir;
       } else if (anchor === 'imu') {
         scrollComponent = this.imu;
-      } else if (anchor === 'photodiode') {
-        scrollComponent = this.photodiode;
       } else if (anchor === 'misc') {
         scrollComponent = this.misc;
       }
@@ -124,7 +121,6 @@ class DataPage extends Component {
           <DataLed ref={(section) => { this.led = section; }} />
           <DataIr ref={(section) => { this.ir = section; }} />
           <DataImu ref={(section) => { this.imu = section; }} />
-          <DataPhotodiode ref={(section) => { this.photodiode = section; }} />
           <DataMisc ref={(section) => { this.misc = section; }} />
         </div>
       </div>
