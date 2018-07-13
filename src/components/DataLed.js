@@ -3,11 +3,6 @@ import React, { Component } from 'react';
 import { getSignalsLatestSingle } from '../utils/EQUiSatAPI';
 import '../assets/Data.css';
 
-import * as params from '../utils/chartjs_params';
-
-// import 'chartjs-plugin-datalabels';
-import {Doughnut} from 'react-chartjs-2';
-
 class DataLed extends Component {
 
   constructor(props) {

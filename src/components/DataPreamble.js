@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 
-import { getSignalsLatestSingle, getPreambleData } from '../utils/EQUiSatAPI';
+import { getPreambleData } from '../utils/EQUiSatAPI';
 import '../assets/Data.css';
-
-import * as params from '../utils/chartjs_params';
-
-// import 'chartjs-plugin-datalabels';
-import {Doughnut} from 'react-chartjs-2';
 
 class DataPreamble extends Component {
 
@@ -33,7 +28,7 @@ class DataPreamble extends Component {
     return (
       <div>
         <div className="subtitle">
-          <p>Preamble</p>
+          <p>Last Transmission</p>
         </div>
         <div className="row">
           <div className="col-6 graphCard">

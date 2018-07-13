@@ -17,8 +17,9 @@ class CadPage extends Component {
           </MediaQuery>
         <iframe
           className="cadFrame"
-          src="https://myhub.autodesk360.com/ue2aaba84/shares/public/SH7f1edQT22b515c761e08a6bec09be6c898?mode=embed"
+          src="https://myhub.autodesk360.com/ue2d9e293/shares/public/SHabee1QT1a327cf2b7a9907ea329c429482?mode=embed"
           allowFullScreen="true"
+          title="cadFrame"
         >
         </iframe>
       </div>

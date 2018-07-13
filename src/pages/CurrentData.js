@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import scrollToComponent from 'react-scroll-to-component';
 
-import { getCurrentInfoData, getSignalsLatestSingle } from '../utils/EQUiSatAPI';
-import { signalToName } from '../utils/HumanReadables';
-
 import Navigation from '../components/Navigation';
 import NavigationMobile from '../components/NavigationMobile';
 import DataNavbar from '../components/DataNavbar';
@@ -19,10 +16,6 @@ import DataPhotodiode from '../components/DataPhotodiode';
 import DataMisc from '../components/DataMisc';
 import '../assets/Data.css';
 
-import * as params from '../utils/chartjs_params';
-
-// import 'chartjs-plugin-datalabels';
-import {Doughnut} from 'react-chartjs-2';
 import Chart from 'chart.js';
 
 class DataPage extends Component {

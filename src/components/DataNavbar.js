@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { a } from 'react-router-dom';
-import scrollToComponent from 'react-scroll-to-component';
 
 import '../assets/DataNavbar.css';
 
@@ -17,7 +15,7 @@ class DataPage extends Component {
             <span
               onClick={this.props.scrollToSection('preamble')}
               className="nav-link element"
-            >Preamble</span>
+            >Last Transmission</span>
           </li>
           <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
             <span

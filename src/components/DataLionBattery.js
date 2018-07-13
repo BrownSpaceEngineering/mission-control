@@ -67,7 +67,7 @@ class DataLionBattery extends Component {
               />
             </div>
             <h3>Battery #1</h3>
-            {this.state.currentData.L1_CHGN && <h5 className="caption">Charging</h5>}
+            {!this.state.currentData.L1_CHGN && <h5 className="caption">Charging</h5>}
             {this.state.currentData.L1_ST && <h5 className="caption">Discharging</h5>}
           </div>
           <div className="col-6 graphCard">
@@ -78,7 +78,7 @@ class DataLionBattery extends Component {
               />
             </div>
             <h3>Battery #2</h3>
-            {this.state.currentData.L2_CHGN && <h5 className="caption">Charging</h5>}
+            {!this.state.currentData.L2_CHGN && <h5 className="caption">Charging</h5>}
             {this.state.currentData.L2_ST && <h5 className="caption">Discharging</h5>}
           </div>
         </div>
@@ -122,7 +122,7 @@ class DataLionBattery extends Component {
             <p className="caption">Charge Setting</p>
           </div>
           <div className="col-4 graphCard">
-            {this.state.currentData.L1_DISG ? <h5 className="elem-5">ON</h5> : <h5 className="elem-1">OFF</h5>}
+            {!this.state.currentData.L1_DISG ? <h5 className="elem-5">ON</h5> : <h5 className="elem-1">OFF</h5>}
             <p className="caption">Discharge Setting</p>
           </div>
           <div className="col-4 graphCard">
@@ -139,7 +139,7 @@ class DataLionBattery extends Component {
             <p className="caption">Charge Setting</p>
           </div>
           <div className="col-4 graphCard">
-            {this.state.currentData.L2_DISG ? <h5 className="elem-5">ON</h5> : <h5 className="elem-1">OFF</h5>}
+            {!this.state.currentData.L2_DISG ? <h5 className="elem-5">ON</h5> : <h5 className="elem-1">OFF</h5>}
             <p className="caption">Discharge Setting</p>
           </div>
           <div className="col-4 graphCard">
