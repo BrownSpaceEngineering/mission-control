@@ -1,3 +1,7 @@
+.data-navbar {
+    position: fixed;
+}
+
 
 .data-navbar .text {
     font-weight: 400;
@@ -8,10 +12,16 @@
     margin-bottom: 5px;
 }
 
-.data-navbar a {
+.data-navbar .element {
     color: white;
     font-weight: 300;
+    cursor: pointer;
 }
+
+.data-navbar .element:hover {
+    color: rgb(200, 200, 200);
+}
+
 
 .data-navbar .active {
     background-color: rgb(35, 152, 152);

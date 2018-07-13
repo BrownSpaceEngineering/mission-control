@@ -36,14 +36,14 @@
     width: 100vw;
     height: 100vh;
     background-color: black;
-    padding-top: 8vh;
+    padding-top: 75px;
 }
 
 .leftBar {
     position: fixed;
     z-index: 10;
     height: 92vh;
-    top: 8vh;
+    top: 75px;
     left: 0;
     width: 25vw;
     display: grid;
@@ -55,7 +55,7 @@
     .rightBar {
         position: fixed;
         z-index: 10;
-        top: 8vh;
+        top: 75px;
         right: 0;
         width: 22vw;
         display: grid;

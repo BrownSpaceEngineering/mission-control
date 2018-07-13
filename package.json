@@ -48,6 +48,8 @@
     "react-geolocated": "^2.4.0",
     "react-responsive": "^4.1.0",
     "react-router-dom": "^4.3.1",
+    "react-scroll-to-component": "^1.0.2",
+    "react-scrollable-anchor": "^0.6.1",
     "react-switch": "^3.0.4",
     "request-ip": "^2.0.2",
     "resolve": "1.6.0",

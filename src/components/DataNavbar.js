@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { a } from 'react-router-dom';
+import scrollToComponent from 'react-scroll-to-component';
 
 import '../assets/DataNavbar.css';
 
@@ -10,28 +11,63 @@ class DataPage extends Component {
       <div className="data-navbar">
         <ul className="nav flex-column">
           <li className="nav-item text">
-            Navigation
-          </li>
-          <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
-            <Link to="/data" className="nav-link">Current Data</Link>
+            Latest Data
           </li>
           <li className={`nav-item ${this.props.active === 'preamble' && 'active'}`}>
-            <Link className="nav-link" to="/data/preamble">Preamble</Link>
+            <span
+              onClick={this.props.scrollToSection('preamble')}
+              className="nav-link element"
+            >Preamble</span>
           </li>
-          <li className={`nav-item ${this.props.active === 'idle-data' && 'active'}`}>
-            <Link className="nav-link" to="/data/idle">Idle Data</Link>
+          <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
+            <span
+              onClick={this.props.scrollToSection('lion')}
+              className="nav-link element"
+            >LiOn Battery</span>
           </li>
-          <li className={`nav-item ${this.props.active === 'attitude' && 'active'}`}>
-            <Link className="nav-link" to="/data/attitude">Attitude</Link>
+          <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
+            <span
+              onClick={this.props.scrollToSection('lifepo')}
+              className="nav-link element"
+            >LiFePO Battery</span>
           </li>
-          <li className={`nav-item ${this.props.active === 'flash-burst' && 'active'}`}>
-            <Link className="nav-link" to="/data/flash-burst">Flash Burst</Link>
+          <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
+            <span
+              onClick={this.props.scrollToSection('led')}
+              className="nav-link element"
+            >LED</span>
           </li>
-          <li className={`nav-item ${this.props.active === 'flash-comparison' && 'active'}`}>
-            <Link className="nav-link" to="/data/flash-comparison">Flash Comparison</Link>
+          <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
+            <span
+              onClick={this.props.scrollToSection('ir')}
+              className="nav-link element"
+            >Panel Sensors</span>
           </li>
-          <li className={`nav-item ${this.props.active === 'low-power' && 'active'}`}>
-            <Link className="nav-link" to="/data/low-power">Low Power</Link>
+          <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
+            <span
+              onClick={this.props.scrollToSection('imu')}
+              className="nav-link element"
+            >IMU</span>
+          </li>
+          <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
+            <span
+              onClick={this.props.scrollToSection('photodiode')}
+              className="nav-link element"
+            >Photodiode</span>
+          </li>
+          <li className={`nav-item ${this.props.active === 'current-data' && 'active'}`}>
+            <span
+              onClick={this.props.scrollToSection('misc')}
+              className="nav-link element"
+            >Misc</span>
+          </li>
+          <li className="nav-item text" style={{marginTop: '50px'}}>
+            Historical Data
+          </li>
+          <li className={`nav-item ${this.props.active === 'preamble' && 'active'}`}>
+            <span
+              className="nav-link element"
+            >Coming Soon</span>
           </li>
         </ul>
       </div>
