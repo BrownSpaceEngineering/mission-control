@@ -295,11 +295,7 @@ class CesiumPage extends Component {
           </MediaQuery>
           <MediaQuery query="(max-width: 769px)">
             <NavigationMobile active='missioncontrol' />
-          </MediaQuery>
-          <div className="leftBar">
-            <Preamble />
-            <CurrentData />
-          </div>
+          </MediaQuery>          
           <div className='rightBar'>
             <TrackingData
               lon={this.state.longitude}
