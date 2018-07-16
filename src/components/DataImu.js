@@ -8,9 +8,15 @@ class DataImu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      accelerometer: {},
-      gyroscope: {},
-      magnetometer: {},
+      accelerometerX: {},
+      accelerometerY: {},
+      accelerometerZ: {},
+      gyroscopeX: {},
+      gyroscopeY: {},
+      gyroscopeZ: {},
+      magnetometerX: {},
+      magnetometerY: {},
+      magnetometerZ: {},
       data: {}
     };
   }
@@ -24,9 +30,15 @@ class DataImu extends Component {
         });
 
         this.setState({
-          accelerometer: data.accelerometer1,
-          gyroscope: data.gyroscope,
-          magnetometer: data.magnetometer1,
+          accelerometerX: data.accelerometer1X,
+          accelerometerY: data.accelerometer1Y,
+          accelerometerZ: data.accelerometer1Z,        
+          gyroscopeX: data.gyroscopeX,
+          gyroscopeY: data.gyroscopeY,
+          gyroscopeZ: data.gyroscopeZ,
+          magnetometerX: data.magnetometer1X,
+          magnetometerY: data.magnetometer1Y,
+          magnetometerZ: data.magnetometer1Z,
           IMU_TEMP: data.IMU_TEMP
         });
       }
@@ -46,15 +58,15 @@ class DataImu extends Component {
             <h3 className="statTitle">Accelerometer</h3>
             <div className="graph">
               <div>
-                <h4 className="elem-1">{this.state.accelerometer.x} g</h4>
+                <h4 className="elem-1">{this.state.accelerometerX} g</h4>
                 <p className="caption">X</p>
               </div>
               <div>
-                <h4 className="elem-2">{this.state.accelerometer.y} g</h4>
+                <h4 className="elem-2">{this.state.accelerometerY} g</h4>
                 <p className="caption">Y</p>
               </div>
               <div>
-                <h4 className="elem-3">{this.state.accelerometer.z} g</h4>
+                <h4 className="elem-3">{this.state.accelerometerZ} g</h4>
                 <p className="caption">Z</p>
               </div>
             </div>
@@ -63,15 +75,15 @@ class DataImu extends Component {
             <h3 className="statTitle">Gyroscope</h3>
             <div className="graph">
               <div>
-                <h4 className="elem-1">{this.state.gyroscope.x} d/s</h4>
+                <h4 className="elem-1">{this.state.gyroscopeX} d/s</h4>
                 <p className="caption">X</p>
               </div>
               <div>
-                <h4 className="elem-2">{this.state.gyroscope.y} d/s</h4>
+                <h4 className="elem-2">{this.state.gyroscopeY} d/s</h4>
                 <p className="caption">Y</p>
               </div>
               <div>
-                <h4 className="elem-3">{this.state.gyroscope.z} d/s</h4>
+                <h4 className="elem-3">{this.state.gyroscopeZ} d/s</h4>
                 <p className="caption">Z</p>
               </div>
             </div>
@@ -80,15 +92,15 @@ class DataImu extends Component {
             <h3 className="statTitle">Magnetometer</h3>
             <div className="graph">
               <div>
-                <h4 className="elem-1">{this.state.magnetometer.x} mG</h4>
+                <h4 className="elem-1">{this.state.magnetometerX} mG</h4>
                 <p className="caption">X</p>
               </div>
               <div>
-                <h4 className="elem-2">{this.state.magnetometer.y} mG</h4>
+                <h4 className="elem-2">{this.state.magnetometerY} mG</h4>
                 <p className="caption">Y</p>
               </div>
               <div>
-                <h4 className="elem-3">{this.state.magnetometer.z} mG</h4>
+                <h4 className="elem-3">{this.state.magnetometerZ} mG</h4>
                 <p className="caption">Z</p>
               </div>
             </div>
