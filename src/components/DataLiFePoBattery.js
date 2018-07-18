@@ -76,7 +76,7 @@ class DataLiFePoBattery extends Component {
               />
             </div>
             <h3>Battery #1</h3>
-            {!this.state.data.LF_B1_CHGN && <h5 className="caption">Charging</h5>}
+            {this.state.data.LF_B1_CHGN && <h5 className="caption">Charging</h5>}
           </div>
           <div className="col-3 graphCard">
             <div className="graph small-graph">
@@ -86,7 +86,7 @@ class DataLiFePoBattery extends Component {
               />
             </div>
             <h3>Battery #2</h3>
-            {!this.state.data.LF_B2_CHGN && <h5 className="caption">Charging</h5>}
+            {this.state.data.LF_B2_CHGN && <h5 className="caption">Charging</h5>}
           </div>
           <div className="col-3 graphCard">
             <div className="graph small-graph">
@@ -96,7 +96,7 @@ class DataLiFePoBattery extends Component {
               />
             </div>
             <h3>Battery #3</h3>
-            {!this.state.data.LF_B3_CHGN && <h5 className="caption">Charging</h5>}
+            {this.state.data.LF_B3_CHGN && <h5 className="caption">Charging</h5>}
           </div>
           <div className="col-3 graphCard">
             <div className="graph small-graph">
@@ -106,7 +106,7 @@ class DataLiFePoBattery extends Component {
               />
             </div>
             <h3>Battery #4</h3>
-            {!this.state.data.LF_B4_CHGN && <h5 className="caption">Charging</h5>}
+            {this.state.data.LF_B4_CHGN && <h5 className="caption">Charging</h5>}
           </div>
         </div>
         <div className="row">
