@@ -41,7 +41,7 @@ class DataImu extends Component {
           magnetometerX: (typeof data.magnetometer1X != 'undefined') ? data.magnetometer1X : "?",
           magnetometerY: (typeof data.magnetometer1Y != 'undefined') ? data.magnetometer1Y : "?",
           magnetometerZ: (typeof data.magnetometer1Z != 'undefined') ? data.magnetometer1Z : "?",
-          IMU_TEMP: data.IMU_TEMP,
+          IMU_TEMP: data.IMU_TEMP.toFixed(2),
         });
       }
     });
