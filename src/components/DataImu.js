@@ -8,38 +8,40 @@ class DataImu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      accelerometerX: {},
-      accelerometerY: {},
-      accelerometerZ: {},
-      gyroscopeX: {},
-      gyroscopeY: {},
-      gyroscopeZ: {},
-      magnetometerX: {},
-      magnetometerY: {},
-      magnetometerZ: {},
+      accelerometerX: "",
+      accelerometerY: "",
+      accelerometerZ: "",
+      gyroscopeX: "",
+      gyroscopeY: "",
+      gyroscopeZ: "",
+      magnetometerX: "",
+      magnetometerY: "",
+      magnetometerZ: "",
+
       data: {}
     };
   }
 
-  componentDidMount() {
-    getSignalsLatestSingle(["accelerometer1", "gyroscope", "magnetometer1", 'IMU_TEMP']).then((res) => {
+  componentDidMount() {    
+    getSignalsLatestSingle(["accelerometer1", "gyroscope", "magnetometer1", "accelerometer1X", "accelerometer1Y", "accelerometer1Z", "gyroscopeX", "gyroscopeY", "gyroscopeZ", "magnetometer1X", "magnetometer1Y", "magnetometer1Z", 'IMU_TEMP']).then((res) => {      
       if (res.status === 200) {
-        const data = res.data;
+        const data = res.data;        
         Object.keys(data).forEach((key) => {
           data[key] = data[key].value;
         });
 
+        
         this.setState({
-          accelerometerX: data.accelerometer1X,
-          accelerometerY: data.accelerometer1Y,
-          accelerometerZ: data.accelerometer1Z,        
-          gyroscopeX: data.gyroscopeX,
-          gyroscopeY: data.gyroscopeY,
-          gyroscopeZ: data.gyroscopeZ,
-          magnetometerX: data.magnetometer1X,
-          magnetometerY: data.magnetometer1Y,
-          magnetometerZ: data.magnetometer1Z,
-          IMU_TEMP: data.IMU_TEMP
+          accelerometerX: (typeof data.accelerometer1X != 'undefined') ? data.accelerometer1X : "?",
+          accelerometerY: (typeof data.accelerometer1Y != 'undefined') ? data.accelerometer1Y : "?",
+          accelerometerZ: (typeof data.accelerometer1Z != 'undefined') ? data.accelerometer1Z : "?",
+          gyroscopeX: (typeof data.gyroscopeX != 'undefined') ? data.gyroscopeX : "?",
+          gyroscopeY: (typeof data.gyroscopeY != 'undefined') ? data.gyroscopeY : "?",
+          gyroscopeZ: (typeof data.gyroscopeZ != 'undefined') ? data.gyroscopeZ : "?",
+          magnetometerX: (typeof data.magnetometer1X != 'undefined') ? data.magnetometer1X : "?",
+          magnetometerY: (typeof data.magnetometer1Y != 'undefined') ? data.magnetometer1Y : "?",
+          magnetometerZ: (typeof data.magnetometer1Z != 'undefined') ? data.magnetometer1Z : "?",
+          IMU_TEMP: data.IMU_TEMP,
         });
       }
     });
