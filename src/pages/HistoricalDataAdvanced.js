@@ -210,48 +210,64 @@ class HistoricalData extends Component {
           <div className="break">
             <hr />
           </div>
-          <DatePicker
-              selected={this.state.fromDate}
-              onChange={this.onChangeFromDate}
-              showTimeSelect
-              timeFormat="HH:mm"
-              timeIntervals={15}
-              dateFormat="LLL"
-              timeCaption="time"
-          />
-          <DatePicker
-              selected={this.state.toDate}
-              onChange={this.onChangeToDate}
-              showTimeSelect
-              timeFormat="HH:mm"
-              timeIntervals={15}
-              dateFormat="LLL"
-              timeCaption="time"
-          />
-          <Dropdown
-            options={this.options}
-            onChange={this.onSelectDropdown(1)}
-            value={this.state.option1}
-            placeholder="Select an option"
-          />
-          <Dropdown
-            options={this.options}
-            onChange={this.onSelectDropdown(2)}
-            value={this.state.option2}
-            placeholder="Select an option"
-          />
-          <Dropdown
-            options={this.options}
-            onChange={this.onSelectDropdown(3)}
-            value={this.state.option3}
-            placeholder="Select an option"
-          />
-          <Dropdown
-            options={this.options}
-            onChange={this.onSelectDropdown(4)}
-            value={this.state.option4}
-            placeholder="Select an option"
-          />
+          <div className="row">
+            <div className="col-6">
+              <DatePicker
+                selected={this.state.fromDate}
+                onChange={this.onChangeFromDate}
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                dateFormat="LLL"
+                timeCaption="time"
+              />
+            </div>
+            <div className="col-6">
+              <DatePicker
+                selected={this.state.toDate}
+                onChange={this.onChangeToDate}
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                dateFormat="LLL"
+                timeCaption="time"
+            />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-3">
+              <Dropdown
+                options={this.options}
+                onChange={this.onSelectDropdown(1)}
+                value={this.state.option1}
+                placeholder="Select an option"
+              />
+            </div>
+            <div className="col-3">
+              <Dropdown
+                options={this.options}
+                onChange={this.onSelectDropdown(2)}
+                value={this.state.option2}
+                placeholder="Select an option"
+              />
+            </div>
+            <div className="col-3">
+              <Dropdown
+                options={this.options}
+                onChange={this.onSelectDropdown(3)}
+                value={this.state.option3}
+                placeholder="Select an option"
+              />
+            </div>
+            <div className="col-3">
+              <Dropdown
+                options={this.options}
+                onChange={this.onSelectDropdown(4)}
+                value={this.state.option4}
+                placeholder="Select an option"
+              />
+            </div>
+          </div>
           <Line
             data={this.state.data}
           />

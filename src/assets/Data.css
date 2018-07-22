@@ -165,3 +165,30 @@ body {
 .react-datepicker__time-list {
     padding-left: 0px;
 }
+
+.Dropdown-control {
+    background-color: rgb(37, 40, 48) !important;
+    color: white !important;
+    font-weight: 300;
+    border-color: #51586a !important;
+}
+
+.Dropdown-menu {
+    border-color: #51586a !important;
+}
+
+.Dropdown-option {
+    background-color: rgb(37, 40, 48) !important;
+    color: white !important;
+    font-weight: 300;
+}
+
+.react-datepicker__input-container input {
+    background-color: rgb(37, 40, 48);
+    color: white;
+    padding: 5px;
+    border: 1px solid #51586a;
+    border-radius: 5px;
+    font-weight: 300;
+}
+
