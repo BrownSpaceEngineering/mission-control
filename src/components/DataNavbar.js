@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import '../assets/DataNavbar.css';
 
@@ -57,9 +58,15 @@ class DataPage extends Component {
             Historical Data
           </li>
           <li className={`nav-item ${this.props.active === 'preamble' && 'active'}`}>
-            <span
+            <Link to='/data/historical'
               className="nav-link element"
-            >Coming Soon</span>
+            >Overview</Link>
+          </li>
+          <li className={`nav-item ${this.props.active === 'preamble' && 'active'}`}>
+            <Link
+              to='/data/historical/advanced'
+              className="nav-link element"
+            >Advanced</Link>
           </li>
         </ul>
       </div>

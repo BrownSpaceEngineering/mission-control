@@ -11,37 +11,37 @@ export function signalToName(signalName) {
 }
 
 // converts a raw signal name (string) to a human-readable title-text-like description
-function signalToDescription(signalName) {
+export function signalToDescription(signalName) {
     return handleNotInObj(signalName, signalDescriptions) || signalDescriptions[signalName];
 }
 
 // converts a numeric error code to its string name
-function errorCodeToName(ecode) {
+export function errorCodeToName(ecode) {
     return handleNotInObj(ecode, ecodeNames) || ecodeNames[ecode];
 }
 
 // converts a numeric error code to its human-readable description
-function errorCodeToDescription(ecode) {
+export function errorCodeToDescription(ecode) {
     return errorCodeNameToDescription(errorCodeToName(ecode));
 }
 
 // converts an error code string name to its human-readable description
-function errorCodeNameToDescription(ecodeName) {
+export function errorCodeNameToDescription(ecodeName) {
     return handleNotInObj(ecodeName, ecodeDescriptions) || ecodeDescriptions[ecodeName];
 }
 
 // converts a numeric error location to its string name
-function errorLocToName(eloc) {
+export function errorLocToName(eloc) {
     return handleNotInObj(eloc, elocNames) || elocNames[eloc];
 }
 
 // converts a numeric error location to its human-readable description
-function errorLocToDescription(eloc) {
+export function errorLocToDescription(eloc) {
     return errorLocNameToDescription(errorLocToName(eloc));
 }
 
 // converts an error location string name to its human-readable description
-function errorLocNameToDescription(elocName) {
+export function errorLocNameToDescription(elocName) {
     return handleNotInObj(elocName, elocDescriptions) || elocDescriptions[elocName];
 }
 
@@ -63,16 +63,19 @@ function handleNotInObj(key, obj) {
 var signalNames = {
     "L1_REF": "LiOn #1 Voltage",
     "L2_REF": "LiOn #2 Voltage",
+    "LREF_AVG": "LiOn Average Voltage",
     "L1_SNS": "LiOn #1 Current",
     "L2_SNS": "LiOn #2 Current",
     "L1_TEMP": "LiOn #1 Temperature",
     "L2_TEMP": "LiOn #2 Temperature",
+    "LTEMP_AVG": "Average Battery Temperature",
     "PANELREF": "Solar Panel Voltage",
     "L_REF": "Active LiOn Voltage",
     "LF1REF": "LiFePo #1 Voltage",
     "LF2REF": "LiFePo #2 Voltage",
     "LF3REF": "LiFePo #3 Voltage",
     "LF4REF": "LiFePo #4 Voltage",
+    "LFREF_AVG": "Average LiFePo Voltage",
     "L1_RUN_CHG": "LiOn #1 Charge Setting",
     "L2_RUN_CHG": "LiOn #2 Charge Setting",
     "LF_B1_RUN_CHG": "LiFePo Bank #1 Charge Setting",
@@ -97,6 +100,7 @@ var signalNames = {
     "IR_RBF_AMB": "Ambient Infrared Sensor (RBF Panel)",
     "IR_ACCESS_AMB": "Ambient Infrared Sensor (Access Panel)",
     "IR_TOP1_AMB": "Ambient Infrared Sensor (Top Panel)",
+    "IR_AMB_AVG": "Average Infrared Ambient Temperature",
     "IR_FLASH_OBJ": "Object Infrared Sensor (Flash Panel)",
     "IR_SIDE1_OBJ": "Object Infrared Sensor (Side Panel 1)",
     "IR_SIDE2_OBJ": "Object Infrared Sensor (Side Panel 2)",
@@ -123,16 +127,19 @@ var signalNames = {
     "LFB2SNS": "LiFePo Bank #2 Current",
     "LFB1OSNS": "LiFePo Bank #1 Output Current",
     "LFB2OSNS": "LiFePo Bank #2 Output Current",
+    "LFBSNS_AVG": "Average LiFePo Current",
     "LF1_TEMP": "LiFePo #1 Temperature",
     "LF3_TEMP": "LiFePo #3 Temperature",
     "LED1SNS": "LED #1 Current",
     "LED2SNS": "LED #2 Current",
     "LED3SNS": "LED #3 Current",
     "LED4SNS": "LED #4 Current",
+    "LEDSNS_AVG": "Average LED Current",
     "LED1TEMP": "LED #1 Temperature",
     "LED2TEMP": "LED #2 Temperature",
     "LED3TEMP": "LED #3 Temperature",
     "LED4TEMP": "LED #4 Temperature",
+    "LEDTEMP_AVG": "Average LED Temperature",
     "FLASH_KILLED": "Flashing Remotely Disabled",
     "MRAM_CPY": "Program Memory Rewritten",
     "satellite_state": "Satellite State",

@@ -159,3 +159,9 @@ body {
 .dataContainer .elem-7 {
     color: rgb(255, 159, 64);
 }
+
+/* Compatibility with react components */
+
+.react-datepicker__time-list {
+    padding-left: 0px;
+}

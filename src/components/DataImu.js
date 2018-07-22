@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { getSignalsLatestSingle } from '../utils/EQUiSatAPI';
+import { getAttitudeData } from '../utils/EQUiSatAPI';
 import '../assets/Data.css';
 
 class DataImu extends Component {
@@ -16,19 +16,27 @@ class DataImu extends Component {
   }
 
   componentDidMount() {
-    getSignalsLatestSingle(["accelerometer1", "gyroscope", "magnetometer1", 'IMU_TEMP']).then((res) => {
+    getAttitudeData(null, 1).then((res) => {
       if (res.status === 200) {
-        const data = res.data;
-        Object.keys(data).forEach((key) => {
-          data[key] = data[key].value;
-        });
+        const data = res.data[0].payload;
 
         this.setState({
-          accelerometer: data.accelerometer1,
-          gyroscope: data.gyroscope,
-          magnetometer: data.magnetometer1,
-          IMU_TEMP: data.IMU_TEMP
-        });
+          accelerometer: {
+            x: data.accelerometer1X,
+            y: data.accelerometer1Y,
+            z: data.accelerometer1Z,
+          },
+          gyroscope: {
+            x: data.gyroscopeX,
+            y: data.gyroscopeY,
+            z: data.gyroscopeZ,
+          },
+          magnetometer: {
+            x: data.magnetometer1X,
+            y: data.magnetometer1Y,
+            z: data.magnetometer1Z,
+          },
+        })
       }
     });
   }
