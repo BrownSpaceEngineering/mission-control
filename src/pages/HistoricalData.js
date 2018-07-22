@@ -6,13 +6,6 @@ import Navigation from '../components/Navigation';
 import NavigationMobile from '../components/NavigationMobile';
 import DataNavbar from '../components/HistoricalDataNavbar';
 
-import DataPreamble from '../components/DataPreamble';
-import DataLionBattery from '../components/DataLionBattery';
-import DataLiFePoBattery from '../components/DataLiFePoBattery';
-import DataLed from '../components/DataLed';
-import DataIr from '../components/DataIr';
-import DataImu from '../components/DataImu';
-import DataMisc from '../components/DataMisc';
 import '../assets/Data.css';
 
 import Chart from 'chart.js';
@@ -115,7 +108,7 @@ class HistoricalData extends Component {
           <div className="break">
             <hr />
           </div>
-
+          <h3>Coming Soon</h3>
         </div>
       </div>
     );

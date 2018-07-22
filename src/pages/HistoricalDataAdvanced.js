@@ -14,7 +14,7 @@ import DataNavbar from '../components/HistoricalDataNavbar';
 
 import { signalToName } from '../utils/HumanReadables';
 import { getSignalsInPeriod } from '../utils/EQUiSatAPI';
-import { dataLineOne, dataLineTwo, dataLineThree, dataLineFour } from '../utils/chartjs_params';
+import { dataLineOne, dataLineTwo, dataLineThree, dataLineFour, unitMappings } from '../utils/chartjs_params';
 import '../assets/Data.css';
 
 import { Line } from 'react-chartjs-2';
@@ -117,22 +117,26 @@ class HistoricalData extends Component {
         const datasets = [];
         if (this.state.option1) {
           const data1 = res.data[this.state.option1.value];
-          datasets.push(dataLineOne(signalToName(this.state.option1.value), data1));
+          const title = `${signalToName(this.state.option1.value)} (${unitMappings[this.state.option1.value]})`;
+          datasets.push(dataLineOne(title, data1));
         }
 
         if (this.state.option2) {
           const data1 = res.data[this.state.option2.value];
-          datasets.push(dataLineTwo(signalToName(this.state.option2.value), data1));
+          const title = `${signalToName(this.state.option2.value)} (${unitMappings[this.state.option2.value]})`;
+          datasets.push(dataLineTwo(title, data1));
         }
 
         if (this.state.option3) {
           const data1 = res.data[this.state.option3.value];
-          datasets.push(dataLineThree(signalToName(this.state.option3.value), data1));
+          const title = `${signalToName(this.state.option3.value)} (${unitMappings[this.state.option3.value]})`;
+          datasets.push(dataLineThree(title, data1));
         }
 
         if (this.state.option4) {
           const data1 = res.data[this.state.option4.value];
-          datasets.push(dataLineFour(signalToName(this.state.option4.value), data1));
+          const title = `${signalToName(this.state.option4.value)} (${unitMappings[this.state.option4.value]})`;
+          datasets.push(dataLineFour(title, data1));
         }
 
         this.setState({
@@ -206,7 +210,7 @@ class HistoricalData extends Component {
           <DataNavbar />
         </div>
         <div className="dataContainer col-10">
-          <h2>Historical Data</h2>
+          <h2>Historical Data (Advanced)</h2>
           <div className="break">
             <hr />
           </div>
