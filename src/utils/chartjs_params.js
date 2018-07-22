@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export function opt_L_BATTERY(percentage) {
   return {
     cutoutPercentage: 80,
@@ -55,7 +57,8 @@ function zipTimestampAndValue(data) {
   const values = data.values;
 
   for (let i = 0; i < timestamps.length; i++) {
-    result.push({x: timestamps[i], y: values[i]});
+    result.push({x: moment(timestamps[i]).format("MM/DD/YY, HH:mm:ss.SSS"), y: values[i]});
+    // result.push({x: timestamps[i], y: values[i]});
   }
 
   return result;

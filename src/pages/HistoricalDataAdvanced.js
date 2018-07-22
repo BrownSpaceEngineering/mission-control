@@ -112,6 +112,9 @@ class HistoricalData extends Component {
           labels = [...labels, ...res.data[key].timestamps];
         }
         labels = [...new Set(labels)];
+        for (let i = 0; i < labels.length; i++) {
+          labels[i] = moment(labels[i]).format("MM/DD/YY, HH:mm:ss.SSS");
+        }
 
         // Get datasets
         const datasets = [];
