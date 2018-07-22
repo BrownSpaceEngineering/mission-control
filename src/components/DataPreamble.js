@@ -17,9 +17,13 @@ class DataPreamble extends Component {
     getPreambleData(null, 1).then((res) => {
       if (res.status === 200) {
         const data = res.data[0].preamble;
-        const date = new Date(Date.parse(res.data[0].created));
-        console.log(date);
-        data.created = date.toLocaleString();
+        var date;
+        if (res.data[0].added) {
+          date = new Date(Date.parse(res.data[0].added));
+        } else {
+          date = new Date(Date.parse(res.data[0].created));
+        }
+        data.time = date.toLocaleString();      
         this.setState({
           preambleData: data
         });
@@ -56,8 +60,8 @@ class DataPreamble extends Component {
           </div>
           <div className="col-6 graphCard">
             <div className="subtitle">
-              <p>Timestamp</p>
-              <h5 className="announcement">{this.state.preambleData.created}</h5>
+              <p>Last Transmission</p>
+              <h5 className="announcement">{this.state.preambleData.time}</h5>
             </div>
           </div>
         </div>

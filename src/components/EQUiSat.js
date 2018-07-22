@@ -32,7 +32,7 @@ class EQUiSat extends Component {
       } else {
         newCity = locToSearch.city;
       }
-      fetch(`http://tracking.brownspace.org/api/get_next_pass/ISS%20(ZARYA)/${locToSearch.lon},${locToSearch.lat},0`).then((res) => {
+      fetch(`http://tracking.brownspace.org/api/get_next_pass/${locToSearch.lon},${locToSearch.lat},0`).then((res) => {
         if (res.status === 200) {
           res.json().then((res) => {
             const riseDate = new Date(res.rise_time * 1000);

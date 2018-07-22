@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
-import scrollToComponent from 'react-scroll-to-component';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import Dropdown from 'react-dropdown';

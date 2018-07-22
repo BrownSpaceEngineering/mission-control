@@ -25,6 +25,8 @@ import ScreenSpaceEventType from "cesium/Source/Core/ScreenSpaceEventType"
 import CesiumMath from "cesium/Source/Core/Math"
 import VerticalOrigin from "cesium/Source/Scene/VerticalOrigin"
 
+const tlejs = new TLEJS();
+
 class CesiumPage extends Component {
   constructor(props) {
     super(props);
@@ -56,6 +58,8 @@ class CesiumPage extends Component {
     this.setInitialPinLocation = this.setInitialPinLocation.bind(this);
   }
 
+  tleStr = 'ISS (ZARYA)\n1 25544U 98067A   18167.57342809  .00001873  00000-0  35452-4 0  9993\n2 25544  51.6416  21.7698 0002962 191.5103 260.7459 15.54186563118420';
+
   setInitialPinLocation(viewer) {
     fetch('https://ipapi.co/json/').then((res) => {
       return res.json();
@@ -85,10 +89,8 @@ class CesiumPage extends Component {
       this.setState({
         locked: false,
       });
-    } else {
-      const tlejs = new TLEJS();
-      const tleStr = 'ISS (ZARYA)\n1 25544U 98067A   18167.57342809  .00001873  00000-0  35452-4 0  9993\n2 25544  51.6416  21.7698 0002962 191.5103 260.7459 15.54186563118420';
-      const currentLoc = tlejs.getSatelliteInfo(tleStr, Date.now(), 0, 0, 0);
+    } else {      
+      const currentLoc = tlejs.getSatelliteInfo(this.tleStr, Date.now(), 0, 0, 0);
       const position = Cartesian3.fromDegrees(currentLoc.lng,
                                               currentLoc.lat,
                                               currentLoc.height * 1000);
@@ -101,6 +103,13 @@ class CesiumPage extends Component {
   }
 
   componentDidMount() {
+    fetch('http://tracking.brownspace.org/api/equisat_tle').then((res) => {      
+      if (res.status === 200) {        
+        res.text().then((res) => {
+          this.tleStr = res;
+        });
+      }
+    });
     setTimeout(() => {
       this.setState({
         loaded: true,
@@ -165,27 +174,25 @@ class CesiumPage extends Component {
         }),
       },
     });
-
-    const tlejs = new TLEJS();
-    const tleStr = 'ISS (ZARYA)\n1 25544U 98067A   18167.57342809  .00001873  00000-0  35452-4 0  9993\n2 25544  51.6416  21.7698 0002962 191.5103 260.7459 15.54186563118420';
-    const orbitLines = tlejs.getGroundTrackLngLat(tleStr, 5000);
-    let currentLoc = tlejs.getLatLon(tleStr);
+    
+    const orbitLines = tlejs.getGroundTrackLngLat(this.tleStr, 5000);
+    let currentLoc = tlejs.getLatLon(this.tleStr);
 
     for (let i = 0; i < orbitLines[1].length; i++) {
       const each = orbitLines[1][i]
       const position = Cartesian3.fromDegrees(each[0], each[1], 400 * 1000);
       pathPosition.addSample(JulianDate.now(), position);
-      if (Math.sqrt(Math.pow((each[0] - currentLoc.lng), 2) + Math.pow((each[1] - currentLoc.lat), 2)) < 1) {
+      /*if (Math.sqrt(Math.pow((each[0] - currentLoc.lng), 2) + Math.pow((each[1] - currentLoc.lat), 2)) < 1) {
         break;
-      }
+      }*/
     }
 
     // Fetch position area
-    currentLoc = tlejs.getSatelliteInfo(tleStr, Date.now(), 0, 0, 0);
+    currentLoc = tlejs.getSatelliteInfo(this.tleStr, Date.now(), 0, 0, 0);
     const position = Cartesian3.fromDegrees(currentLoc.lng,
                                             currentLoc.lat,
                                             currentLoc.height * 1000);
-    pathPosition.addSample(JulianDate.now(), position);
+    //pathPosition.addSample(JulianDate.now(), position);
 
     const entity = viewer.entities.add({
       position,
@@ -215,11 +222,11 @@ class CesiumPage extends Component {
     }, 3000);
 
     setInterval(() => {
-      const currentLoc = tlejs.getSatelliteInfo(tleStr, Date.now(), 0, 0, 0);
+      const currentLoc = tlejs.getSatelliteInfo(this.tleStr, Date.now(), 0, 0, 0);
       const position = Cartesian3.fromDegrees(currentLoc.lng,
                                                currentLoc.lat,
                                                currentLoc.height * 1000);
-      pathPosition.addSample(JulianDate.now(), position);
+      //pathPosition.addSample(JulianDate.now(), position);
       entity.position = position;
       if (this.state.locked) {
         viewer.trackedEntity = entity;
@@ -295,11 +302,7 @@ class CesiumPage extends Component {
           </MediaQuery>
           <MediaQuery query="(max-width: 769px)">
             <NavigationMobile active='missioncontrol' />
-          </MediaQuery>
-          <div className="leftBar">
-            <Preamble />
-            <CurrentData />
-          </div>
+          </MediaQuery>          
           <div className='rightBar'>
             <TrackingData
               lon={this.state.longitude}
