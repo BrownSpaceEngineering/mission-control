@@ -33,19 +33,20 @@ class HistoricalData extends Component {
       option3: undefined,
       option4: undefined,
       data: { labels: [], datasets: [] },
-      chartOptions: {},
+      chartOptions: historicalOptions(),
       needToUpdateGraph: false,
     };
 
     const values = ["L1_REF","L2_REF", "LREF_AVG","L1_SNS","L2_SNS","PANELREF","L_REF","LF1REF","LF2REF","LF3REF","LF4REF","LFREF_AVG","LFB1SNS","LFB1OSNS","LFB2SNS","LFB2OSNS","LFBSNS_AVG","LED1SNS","LED2SNS","LED3SNS","LED4SNS","LEDSNS_AVG", "RAD_TEMP","IMU_TEMP","IR_FLASH_AMB","IR_SIDE1_AMB","IR_SIDE2_AMB","IR_RBF_AMB","IR_ACCESS_AMB","IR_TOP1_AMB","IR_AMB_AVG","IR_FLASH_OBJ","IR_SIDE1_OBJ","IR_SIDE2_OBJ","IR_RBF_OBJ","IR_ACCESS_OBJ","IR_TOP1_OBJ","LED1TEMP","LED2TEMP","LED3TEMP","LED4TEMP","LEDTEMP_AVG","L1_TEMP","L2_TEMP","LF1_TEMP","LF3_TEMP","LTEMP_AVG", "PD_TOP1","PD_SIDE1","PD_SIDE2","PD_FLASH","PD_ACCESS","PD_RBF"];
 
-    const options = [];
+    const options = [{value: null, label: "Select an option"}];
 
     values.forEach((value) => {
       const label = signalToName(value);
       options.push({ value, label});
     });
 
+    console.log(options);
     this.options = options;
 
     this.onChangeFromDate = this.onChangeFromDate.bind(this);
@@ -71,6 +72,7 @@ class HistoricalData extends Component {
   onSelectDropdown(number) {
     return (value) => {
       if (number === 1) {
+        console.log(value);
         this.setState({
           option1: value,
           needToUpdateGraph: true,
@@ -97,10 +99,11 @@ class HistoricalData extends Component {
   fetchData() {
     const signals = [];
     [this.state.option1, this.state.option2, this.state.option3, this.state.option4].forEach((opt) => {
-      if (opt !== undefined) {
+      if (opt !== undefined && opt.value) {
         signals.push(opt.value);
       }
     });
+    console.log(signals);
 
     if (signals.length > 0) {
       return getSignalsInPeriod(signals,
@@ -120,28 +123,28 @@ class HistoricalData extends Component {
         // Get datasets
         const datasets = [];
         const titles = {};
-        if (this.state.option1) {
+        if (this.state.option1 && this.state.option1.value) {
           const data1 = res.data[this.state.option1.value];
           const title = `${signalToName(this.state.option1.value)} (${unitMappings[this.state.option1.value]})`;
           datasets.push(dataLineOne(title, data1));
           titles.opt1 = title;
         }
 
-        if (this.state.option2) {
+        if (this.state.option2 && this.state.option2.value) {
           const data1 = res.data[this.state.option2.value];
           const title = `${signalToName(this.state.option2.value)} (${unitMappings[this.state.option2.value]})`;
           datasets.push(dataLineTwo(title, data1));
           titles.opt2 = title;
         }
 
-        if (this.state.option3) {
+        if (this.state.option3 && this.state.option3.value) {
           const data1 = res.data[this.state.option3.value];
           const title = `${signalToName(this.state.option3.value)} (${unitMappings[this.state.option3.value]})`;
           datasets.push(dataLineThree(title, data1));
           titles.opt3 = title;
         }
 
-        if (this.state.option4) {
+        if (this.state.option4 && this.state.option4.value) {
           const data1 = res.data[this.state.option4.value];
           const title = `${signalToName(this.state.option4.value)} (${unitMappings[this.state.option4.value]})`;
           datasets.push(dataLineFour(title, data1));
@@ -149,19 +152,27 @@ class HistoricalData extends Component {
         }
 
         const chartOptions = historicalOptions(titles.opt1, titles.opt2, titles.opt3, titles.opt4);
+        console.log(datasets);
 
         this.setState({
-          data: { xValueType: "dateTime", datasets },
+          data: { datasets },
           needToUpdateGraph: false,
           chartOptions,
         });
       });
     } else {
-      return Promise.resolve({ labels: [], datasets: [] });
+      this.setState({
+        data: { labels: [], datasets: [] },
+        needToUpdateGraph: false,
+        chartOptions: historicalOptions(),
+      });
     }
   }
 
   render() {
+    // TODO: Refactor this code so that fetchData is called in onChangeFromDate,
+    //       onChangeToDate, onSelectDropDown so that this.setState is not called
+    //       during render(). But that won't be done anytime soon...
     if (this.state.needToUpdateGraph) {
       this.fetchData();
     }

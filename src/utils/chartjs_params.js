@@ -161,6 +161,7 @@ export function historicalOptions(opt1, opt2, opt3, opt4) {
   return {
     scales: {
       xAxes: [{
+          // display: opt1 || opt2 || opt3 || opt4,
           title: "time",
           type: 'time',
           gridLines: {
