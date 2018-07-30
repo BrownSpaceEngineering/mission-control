@@ -69,6 +69,7 @@ export function dataLineOne(title, data) {
     label: title,
     fill: false,
     lineTension: 0.1,
+    yAxisID: 'y-axis-1',
     backgroundColor: 'rgba(75,192,192,0.4)',
     borderColor: 'rgba(75,192,192,1)',
     borderCapStyle: 'butt',
@@ -91,6 +92,7 @@ export function dataLineTwo(title, data) {
     label: title,
     fill: false,
     lineTension: 0.1,
+    yAxisID: 'y-axis-2',
     backgroundColor: 'rgba(255, 99, 132,0.4)',
     borderColor: 'rgba(255, 99, 132,1)',
     borderCapStyle: 'butt',
@@ -113,6 +115,7 @@ export function dataLineThree(title, data) {
     label: title,
     fill: false,
     lineTension: 0.1,
+    yAxisID: 'y-axis-3',
     backgroundColor: 'rgba(255, 206, 86, 0.4)',
     borderColor: 'rgba(255, 206, 86, 1)',
     borderCapStyle: 'butt',
@@ -135,6 +138,7 @@ export function dataLineFour(title, data) {
     label: title,
     fill: false,
     lineTension: 0.1,
+    yAxisID: 'y-axis-4',
     backgroundColor: 'rgba(40, 205, 152,0.4)',
     borderColor: 'rgba(40, 205, 152,1)',
     borderCapStyle: 'butt',
@@ -151,6 +155,73 @@ export function dataLineFour(title, data) {
     data: zipTimestampAndValue(data)
   };
 }
+
+export function historicalOptions(opt1, opt2, opt3, opt4) {
+  return {
+    scales: {
+      yAxes: [
+        {
+          type: 'linear',
+          display: opt1,
+          position: 'left',
+          id: 'y-axis-1',
+          title: 'abc',
+          scaleLabel: {
+              display: true,
+              labelString: opt1,
+              fontColor: 'rgba(75,192,192,1)',
+              padding: {
+                top: 10,
+              },
+          },
+        },
+        {
+          type: 'linear',
+          display: opt2,
+          position: 'right',
+          id: 'y-axis-2',
+          scaleLabel: {
+              display: true,
+              labelString: opt2,
+              fontColor: 'rgba(255, 99, 132,1)',
+              padding: {
+                top: 10,
+              },
+          },
+        },
+              {
+          type: 'linear',
+          display: opt3,
+          position: 'left',
+          id: 'y-axis-3',
+          scaleLabel: {
+              display: true,
+              labelString: opt3,
+              fontColor: 'rgba(255, 206, 86, 1)',
+              padding: {
+                top: 10,
+              },
+          },
+        },
+              {
+          type: 'linear',
+          display: opt4,
+          position: 'right',
+          id: 'y-axis-4',
+          scaleLabel: {
+              display: true,
+              labelString: opt4,
+              fontColor: 'rgba(40, 205, 152,1)',
+              padding: {
+                top: 10,
+              },
+          },
+        },
+      ]
+    }
+  };
+}
+
 
 export const unitMappings = {
   "L1_REF": "mV",

@@ -13,7 +13,8 @@ import DataNavbar from '../components/HistoricalDataNavbar';
 
 import { signalToName } from '../utils/HumanReadables';
 import { getSignalsInPeriod } from '../utils/EQUiSatAPI';
-import { dataLineOne, dataLineTwo, dataLineThree, dataLineFour, unitMappings } from '../utils/chartjs_params';
+import { dataLineOne, dataLineTwo, dataLineThree, dataLineFour,
+         historicalOptions, unitMappings } from '../utils/chartjs_params';
 import '../assets/Data.css';
 
 import { Line } from 'react-chartjs-2';
@@ -32,6 +33,7 @@ class HistoricalData extends Component {
       option3: undefined,
       option4: undefined,
       data: { labels: [], datasets: [] },
+      chartOptions: {},
       needToUpdateGraph: false,
     };
 
@@ -117,82 +119,46 @@ class HistoricalData extends Component {
 
         // Get datasets
         const datasets = [];
+        const titles = {};
         if (this.state.option1) {
           const data1 = res.data[this.state.option1.value];
           const title = `${signalToName(this.state.option1.value)} (${unitMappings[this.state.option1.value]})`;
           datasets.push(dataLineOne(title, data1));
+          titles.opt1 = title;
         }
 
         if (this.state.option2) {
           const data1 = res.data[this.state.option2.value];
           const title = `${signalToName(this.state.option2.value)} (${unitMappings[this.state.option2.value]})`;
           datasets.push(dataLineTwo(title, data1));
+          titles.opt2 = title;
         }
 
         if (this.state.option3) {
           const data1 = res.data[this.state.option3.value];
           const title = `${signalToName(this.state.option3.value)} (${unitMappings[this.state.option3.value]})`;
           datasets.push(dataLineThree(title, data1));
+          titles.opt3 = title;
         }
 
         if (this.state.option4) {
           const data1 = res.data[this.state.option4.value];
           const title = `${signalToName(this.state.option4.value)} (${unitMappings[this.state.option4.value]})`;
           datasets.push(dataLineFour(title, data1));
+          titles.opt4 = title;
         }
+
+        const chartOptions = historicalOptions(titles.opt1, titles.opt2, titles.opt3, titles.opt4);
 
         this.setState({
           data: { labels, datasets },
-          needToUpdateGraph: false
+          needToUpdateGraph: false,
+          chartOptions,
         });
       });
     } else {
       return Promise.resolve({ labels: [], datasets: [] });
     }
-  }
-
-  componentDidMount() {
-    Chart.pluginService.register({
-      beforeDraw: function (chart) {
-        if (chart.config.options.elements.center) {
-          //Get ctx from string
-          var ctx = chart.chart.ctx;
-
-          //Get options from the center object in options
-          var centerConfig = chart.config.options.elements.center;
-          var fontStyle = centerConfig.fontStyle || 'Arial';
-          var txt = centerConfig.text;
-          var color = centerConfig.color || '#000';
-          var sidePadding = centerConfig.sidePadding || 20;
-          var sidePaddingCalculated = (sidePadding/100) * (chart.innerRadius * 2)
-          //Start with a base font of 30px
-          ctx.font = "30px " + fontStyle;
-
-          //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
-          var stringWidth = ctx.measureText(txt).width;
-          var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
-
-          // Find out how much the font can grow in width.
-          var widthRatio = elementWidth / stringWidth;
-          var newFontSize = Math.floor(30 * widthRatio);
-          var elementHeight = (chart.innerRadius * 2);
-
-          // Pick a new font size so it will not be larger than the height of label.
-          var fontSizeToUse = Math.min(newFontSize, elementHeight);
-
-          //Set font settings to draw it correctly.
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
-          var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
-          ctx.font = fontSizeToUse+"px " + fontStyle;
-          ctx.fillStyle = color;
-
-          //Draw text in center
-          ctx.fillText(txt, centerX, centerY);
-        }
-      }
-    });
   }
 
   render() {
@@ -276,6 +242,7 @@ class HistoricalData extends Component {
           </div>
           <Line
             data={this.state.data}
+            options={this.state.chartOptions}
           />
         </div>
       </div>
