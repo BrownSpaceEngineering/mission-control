@@ -21,10 +21,6 @@ class DataPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      currentData: {},
-      lifepoData: {}
-    };
 
     this.scrollToSection = this.scrollToSection.bind(this);
   }

@@ -21,11 +21,13 @@ class DataPage extends Component {
           <li className="nav-item text" style={{marginTop: '50px'}}>
             Historical Data
           </li>
-          <li className={`nav-item ${this.props.active === 'preamble' && 'active'}`}>
-            <Link to='/data/historical'
-              className="nav-link element"
-            >Overview</Link>
-          </li>
+          {
+            // <li className={`nav-item ${this.props.active === 'preamble' && 'active'}`}>
+            //   <Link to='/data/historical'
+            //     className="nav-link element"
+            //   >Overview</Link>
+            // </li>
+          }
           <li className={`nav-item ${this.props.active === 'preamble' && 'active'}`}>
             <Link
               to='/data/historical/advanced'
