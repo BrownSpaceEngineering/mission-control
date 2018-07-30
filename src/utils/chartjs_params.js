@@ -57,7 +57,8 @@ function zipTimestampAndValue(data) {
   const values = data.values;
 
   for (let i = 0; i < timestamps.length; i++) {
-    result.push({x: moment(timestamps[i]).format("MM/DD/YY, HH:mm:ss.SSS"), y: values[i]});
+    // result.push({x: moment(timestamps[i]).format("MM/DD/YY, HH:mm:ss.SSS"), y: values[i]});
+    result.push({x: timestamps[i], y: values[i]});
     // result.push({x: timestamps[i], y: values[i]});
   }
 
@@ -159,6 +160,26 @@ export function dataLineFour(title, data) {
 export function historicalOptions(opt1, opt2, opt3, opt4) {
   return {
     scales: {
+      xAxes: [{
+          title: "time",
+          type: 'time',
+          gridLines: {
+              lineWidth: 2
+          },
+          time: {
+              displayFormats: {
+                  millisecond: 'MMM DD hh:mm:ss',
+                  second: 'MMM DD hh:mm:ss',
+                  minute: 'MMM DD hh:mm:ss',
+                  hour: 'MMM DD hh:mm:ss',
+                  day: 'MMM DD hh:mm:ss',
+                  week: 'MMM DD hh:mm:ss',
+                  month: 'MMM DD hh:mm:ss',
+                  quarter: 'MMM DD hh:mm:ss',
+                  year: 'MMM DD hh:mm:ss',
+              }
+          }
+      }],
       yAxes: [
         {
           type: 'linear',

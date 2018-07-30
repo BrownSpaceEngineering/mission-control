@@ -151,7 +151,7 @@ class HistoricalData extends Component {
         const chartOptions = historicalOptions(titles.opt1, titles.opt2, titles.opt3, titles.opt4);
 
         this.setState({
-          data: { labels, datasets },
+          data: { xValueType: "dateTime", datasets },
           needToUpdateGraph: false,
           chartOptions,
         });
