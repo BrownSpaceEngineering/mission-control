@@ -298,9 +298,32 @@ export const unitMappings = {
   "PD_SIDE2": "b",
   "PD_FLASH": "b",
   "PD_ACCESS ": "b",
-  "PD_RBF": "b"
+  "PD_RBF": "binary",
+  "PROG_MEM_REWRITTEN":"binary",
+  "L2_FAULTN":"binary",
+  "LF_B1_FAULTN":"binary",
+  "LF_B1_CHGN":"binary",
+  "FIRST_FLASH":"binary",
+  "gyroscopeX":"deg/s",
+  "gyroscopeZ":"deg/s",
+  "gyroscopeY":"deg/s",
+  "timestamp":"s",
+  "LF_B2_CHGN":"binary",
+  "L1_FAULTN":"binary",
+  "LION_2_CHARGED":"binary",
+  "L1_ST":"binary",
+  "accelerometer2Z":"G",
+  "accelerometer2X":"G",
+  "accelerometer2Y":"G",
+  "magnetometer2X":"g",
+  "magnetometer2Y":"g",
+  "magnetometer2Z":"g",
+  "L2_CHGN":"binary",
+  "L2_ST":"binary",
+  "ANTENNA_DEPLOYED":"binary",
+  "L1_CHGN":"binary",
+  "LION_1_CHARGED":"binary",
+  "LF_B2_FAULTN":"binary",
+  "LIFEPO4_B1_CHARGED":"binary",
+  "LIFEPO4_B2_CHARGED":"binary"
 }
-
-
-
-
