@@ -4,6 +4,7 @@ import MediaQuery from 'react-responsive';
 import Navigation from '../components/Navigation';
 import NavigationMobile from '../components/NavigationMobile';
 import '../assets/Cad.css';
+import CadDownloadButton from '../components/CadDownloadButton';
 
 class CadPage extends Component {
   render() {
@@ -22,6 +23,7 @@ class CadPage extends Component {
           title="cadFrame"
         >
         </iframe>
+        <CadDownloadButton />
       </div>
     );
   }

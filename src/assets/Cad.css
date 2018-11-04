@@ -4,6 +4,20 @@
   overflow: hidden;
 }
 
+.CadDownloadButtom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.Red {
+    color: red;
+}
+
+.Green {
+    color: green;
+}
+
 @media (max-width: 768px) {
     .cadFrame {
         margin-top: 50px;
