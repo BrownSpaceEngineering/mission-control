@@ -40,6 +40,10 @@ class DataLiFePoBattery extends Component {
   }
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
     getSignalsLatestSingle(['LF1REF', 'LF2REF', 'LF3REF', 'LF4REF', 'LFB1SNS',
                             'LFB1OSNS', 'LFB2SNS', 'LFB2OSNS', 'LF1_TEMP',
                             'LF3_TEMP', 'LF_B1_RUN_CHG', 'LF_B1_FAULTN',
@@ -58,10 +62,12 @@ class DataLiFePoBattery extends Component {
 
         this.setState({ data });
       }
+    }).catch((err) => {
+      setTimeout(this.test(),10000);
     });
   }
-
   render() {
+    console.log(this.state.data);
     return (
       <div>
         <div className="subtitle">
