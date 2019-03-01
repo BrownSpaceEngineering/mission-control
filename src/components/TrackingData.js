@@ -32,6 +32,14 @@ class TrackingData extends Component {
       } else {
         newCity = locToSearch.city;
       }
+      fetch(`http://tracking.brownspace.org/api/get_next_passes/EQUISAT/5/${locToSearch.lon},${locToSearch.lat},0`)
+          .then((res) => {
+            if (res.status === 200) {
+              res.json().then((res) => {
+                console.log(res);
+              });
+            }
+      });
       fetch(`http://tracking.brownspace.org/api/get_next_pass/${locToSearch.lon},${locToSearch.lat},0`).then((res) => {
         if (res.status === 200) {
           res.json().then((res) => {
