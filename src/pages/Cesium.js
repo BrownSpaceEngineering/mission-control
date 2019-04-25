@@ -27,6 +27,21 @@ import VerticalOrigin from "cesium/Source/Scene/VerticalOrigin"
 
 const tlejs = new TLEJS();
 
+const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+];
+
 class CesiumPage extends Component {
   constructor(props) {
     super(props);
@@ -52,6 +67,8 @@ class CesiumPage extends Component {
       },
       pin: null,
       receivedGeolocation: false,
+      nextPassesVisible: false,
+      passes: [],
     };
 
     this.toggleLocked = this.toggleLocked.bind(this);
@@ -283,6 +300,53 @@ class CesiumPage extends Component {
     }, ScreenSpaceEventType.LEFT_CLICK);
   }
 
+  formatDate(date) {
+    const hour = date.getHours();
+    const minute = date.getMinutes();
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+
+    return `${hour}:${minute} on ${month} ${day}, ${year}`;
+  }
+
+  showNextPasses(_this) {
+    const lon = _this.state.longitude;
+    const lat = _this.state.latitude;
+    fetch(`http://tracking.brownspace.org/api/get_next_passes/EQUISAT/168/${lon},${lat},0`)
+        .then((res) => {
+          if (res.status === 200) {
+            res.json().then((res) => {
+              let newPasses = [];
+              res.forEach((pass) => {
+                const riseDate = this.formatDate(new Date(pass.rise * 1000));
+                const setDate = this.formatDate(new Date(pass.set * 1000));
+                const maxDate = this.formatDate(new Date(pass.max * 1000));
+                newPasses.push({rise: riseDate, set: setDate, max: maxDate});
+              });
+              _this.setState({nextPassesVisible: true, passes: newPasses});
+            });
+          } else {
+            console.log('failed to show next passes');
+          }
+        });
+  }
+
+  hideNextPasses(_this) {
+    _this.setState({nextPassesVisible: false, passes: []});
+  }
+
+  listPasses(_this) {
+    const currentPasses = _this.state.passes.slice(0, 15);
+    return currentPasses.map(pass =>
+        <div style={{margin: '10px 20px 15px 0'}}>
+          <p style={{margin: 0}}>Rise: {pass.rise}</p>
+          <p style={{margin: 0}}>Max: {pass.max}</p>
+          <p style={{margin: 0}}>Set: {pass.set}</p>
+        </div>
+    );
+  }
+
   render() {
     return (
       <div className='cesiumPage'>
@@ -311,8 +375,37 @@ class CesiumPage extends Component {
               velocity={this.state.velocity}
               homeLocation={this.state.homeLocation}
               pinLocation={this.state.pinLocation}
+              extraPassesOnClick={() => this.showNextPasses(this)}
             />
           </div>
+          {
+            this.state.nextPassesVisible &&
+            <div className='trackingData'
+                 style={{
+                   position: 'relative',
+                   top: '75px',
+                   left: '75px',
+                   width: '70vw',
+                   height: '300px',
+                   display: 'flex',
+                   flexDirection: 'column',
+                   alignContent: 'flex-start',
+                   flexWrap: 'wrap',
+                   paddingTop: '30px',
+                 }}>
+              <h1 style={{display: 'inline-block', position: 'absolute', top: '5px', left: '20px'}}>NEXT PASSES</h1>
+              <i className="fas fa-times"
+                 style={{
+                   position: 'absolute',
+                   top: '10px',
+                   right: '20px',
+                   color: 'red',
+                   fontSize: '20px',
+                 }}
+                 onClick={() => this.hideNextPasses(this)}></i>
+              {this.listPasses(this)}
+            </div>
+          }
           <div id="cesiumContainer"></div>
         </div>
       </div>
