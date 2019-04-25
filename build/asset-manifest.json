@@ -1,15 +1,14 @@
 {
-  "main.css": "static/css/main.d47e0b93.css",
-  "main.css.map": "static/css/main.d47e0b93.css.map",
-  "main.js": "static/js/main.d379183c.js",
-  "main.js.map": "static/js/main.d379183c.js.map",
-  "static\\media\\FXAA3_11.glsl": "static/media/FXAA3_11.319668a0.glsl",
-  "static\\media\\bse_wallpaper.jpg": "static/media/bse_wallpaper.276d0353.jpg",
-  "static\\media\\bse_white.png": "static/media/bse_white.c05204cf.png",
-  "static\\media\\draco_decoder.wasm": "static/media/draco_decoder.252dd9f0.wasm",
-  "static\\media\\facebook.png": "static/media/facebook.fb8c32a1.png",
-  "static\\media\\github.png": "static/media/github.60fefc28.png",
-  "static\\media\\mail.png": "static/media/mail.201c9b1a.png",
-  "static\\media\\sat_logo.png": "static/media/sat_logo.7bf319bf.png",
-  "static\\media\\twitter.png": "static/media/twitter.a94e3776.png"
+  "main.css": "static/css/main.2e0e7ec4.css",
+  "main.css.map": "static/css/main.2e0e7ec4.css.map",
+  "main.js": "static/js/main.e032abcf.js",
+  "main.js.map": "static/js/main.e032abcf.js.map",
+  "static/media/FXAA3_11.glsl": "static/media/FXAA3_11.319668a0.glsl",
+  "static/media/bse_wallpaper.jpg": "static/media/bse_wallpaper.276d0353.jpg",
+  "static/media/bse_white.png": "static/media/bse_white.c05204cf.png",
+  "static/media/draco_decoder.wasm": "static/media/draco_decoder.252dd9f0.wasm",
+  "static/media/facebook.png": "static/media/facebook.fb8c32a1.png",
+  "static/media/github.png": "static/media/github.60fefc28.png",
+  "static/media/mail.png": "static/media/mail.201c9b1a.png",
+  "static/media/twitter.png": "static/media/twitter.a94e3776.png"
 }
