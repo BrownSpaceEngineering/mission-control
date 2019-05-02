@@ -305,9 +305,10 @@ class CesiumPage extends Component {
     const minute = date.getMinutes();
     const day = date.getDate();
     const month = months[date.getMonth()];
-    const year = date.getFullYear();
+    const hourPadding = (hour < 10) ? '0' : '';
+    const minutePadding = (minute < 10) ? '0' : '';
 
-    return `${hour}:${minute} on ${month} ${day}, ${year}`;
+    return `${hourPadding}${hour}:${minutePadding}${minute} on ${month} ${day}`;
   }
 
   showNextPasses(_this) {
@@ -337,9 +338,12 @@ class CesiumPage extends Component {
   }
 
   listPasses(_this) {
-    const currentPasses = _this.state.passes.slice(0, 15);
-    return currentPasses.map(pass =>
-        <div style={{margin: '10px 20px 15px 0'}}>
+    return _this.state.passes.map(pass =>
+        <div style={{
+          margin: '1vw 2vw 0 0',
+          boxSizing: 'border-box',
+          width: '12vw',
+        }}>
           <p style={{margin: 0}}>Rise: {pass.rise}</p>
           <p style={{margin: 0}}>Max: {pass.max}</p>
           <p style={{margin: 0}}>Set: {pass.set}</p>
@@ -388,12 +392,13 @@ class CesiumPage extends Component {
                    width: '70vw',
                    height: '300px',
                    display: 'flex',
-                   flexDirection: 'column',
+                   //flexDirection: 'column',
                    alignContent: 'flex-start',
                    flexWrap: 'wrap',
-                   paddingTop: '30px',
+                   paddingTop: '40px',
+                   overflowY: 'auto',
                  }}>
-              <h1 style={{display: 'inline-block', position: 'absolute', top: '5px', left: '20px'}}>NEXT PASSES</h1>
+              <h1 style={{display: 'inline-block', position: 'absolute', top: '5px', left: '20px'}}>THIS WEEK'S PASSES</h1>
               <i className="fas fa-times"
                  style={{
                    position: 'absolute',
